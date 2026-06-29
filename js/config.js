@@ -5,5 +5,5 @@ window.BRIDGE_API = (function() {
     return 'http://localhost:5000/api';
   }
   // Production: your Render backend URL (update this after deploying)
-  return 'https://bridge-law-api.onrender.com/api';
+  return 'https://bridge-law-api.onrender.com/api'; // Render backend
 })();
