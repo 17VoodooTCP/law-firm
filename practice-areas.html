@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the full range of legal services offered by Christopher R. Bridge & Co. — corporate law, litigation, real estate, family law, and more.">
+  <title>Practice Areas | Christopher R. Bridge & Co. Law Firm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .area-detail-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      margin-bottom: 28px;
+      transition: var(--transition);
+    }
+    .area-detail-card:hover { box-shadow: var(--shadow-lg); border-color: var(--gold-light); }
+    .area-detail-card:nth-child(even) { grid-template-columns: 2fr 1fr; direction: rtl; }
+    .area-detail-card:nth-child(even) > * { direction: ltr; }
+    .area-card-visual {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 30px;
+      gap: 20px;
+      min-height: 260px;
+    }
+    .area-card-visual .big-icon {
+      font-size: 3.5rem;
+      color: var(--gold-light);
+      opacity: 0.9;
+    }
+    .area-card-visual .area-num {
+      font-family: var(--font-serif);
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      position: absolute;
+    }
+    .area-card-body { padding: 40px 44px; position: relative; }
+    .area-card-body h2 { font-family: var(--font-serif); color: var(--navy); font-size: 1.6rem; margin-bottom: 8px; }
+    .area-card-body .area-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      background: rgba(201,168,76,0.1);
+      padding: 4px 12px;
+      border-radius: 30px;
+      margin-bottom: 18px;
+    }
+    .area-card-body p { color: var(--text-light); line-height: 1.8; font-size: 0.92rem; margin-bottom: 24px; }
+    .area-card-body .highlights { display: flex; flex-wrap: wrap; gap: 10px; }
+    .highlight-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      padding: 6px 14px;
+      border-radius: 30px;
+    }
+    .highlight-chip i { color: var(--gold); font-size: 0.7rem; }
+
+    @media (max-width: 768px) {
+      .area-detail-card,
+      .area-detail-card:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+      .area-card-visual { min-height: 160px; padding: 36px 24px; }
+      .area-card-body { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img">
+        <div class="nav-logo-divider"></div>
+        <div class="nav-logo-text">
+          <span class="logo-primary">Christopher R. Bridge &amp; Co.</span>
+          <span class="logo-secondary">Barrister, Solicitor &amp; Legal Consultant</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="practice-areas.html" class="active">Practice Areas</a>
+        <a href="attorneys.html">Our Team</a>
+        <a href="news.html">News &amp; Insights</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+        <span>Practice Areas</span>
+      </div>
+      <h1>Our Practice Areas</h1>
+      <p>Comprehensive legal expertise across all major disciplines — delivered by attorneys who are recognized leaders in their fields.</p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section section--gray">
+    <div class="container text-center reveal">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Full-Spectrum Legal Representation</h2>
+      <div class="gold-divider"></div>
+      <p class="section-subtitle" style="max-width:700px;">
+        From intricate corporate transactions to deeply personal family matters, our attorneys bring the same unwavering commitment to excellence across every practice area. Whatever your legal challenge, we have the expertise to guide you to the best possible outcome.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRACTICE AREA CARDS -->
+  <section class="section">
+    <div class="container" id="practiceDetailContainer">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="stats-section" style="padding:80px 0;">
+    <div class="container" style="text-align:center; position:relative; z-index:1;">
+      <div class="section-label" style="justify-content:center; color:var(--gold-light);">Ready to Begin?</div>
+      <h2 style="font-family:var(--font-serif); color:white; font-size:2.2rem; margin:16px 0 24px;">
+        Speak with an Attorney Today
+      </h2>
+      <p style="color:rgba(255,255,255,0.65); max-width:520px; margin:0 auto 36px; line-height:1.75;">
+        Our team is ready to evaluate your matter and provide the strategic counsel you need. Contact us to schedule a consultation.
+      </p>
+      <a href="index.html#contact" class="btn btn--gold" style="font-size:1rem; padding:16px 36px;">
+        <i class="fa-solid fa-envelope-open-text"></i>
+        Reveal Contact Information
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+            <img src="images/logo.svg" alt="CR Bridge Logo" style="height:52px;width:52px;object-fit:contain;">
+            <div>
+              <div class="footer-logo">Christopher R. Bridge &amp; Co.</div>
+              <div class="footer-logo-sub">Barrister, Solicitor &amp; Legal Consultant</div>
+            </div>
+          </div>
+          <p class="footer-desc">Comprehensive legal representation across all major practice areas since 1991.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Practice Areas</a></li>
+            <li><a href="attorneys.html"><i class="fa-solid fa-chevron-right"></i> Our Team</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News</a></li>
+            <li><a href="careers.html"><i class="fa-solid fa-chevron-right"></i> Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Practice Areas</h4>
+          <ul>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Corporate Law</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Civil Litigation</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Real Estate Law</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Family Law</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Immigration Law</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Criminal Defense</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>123 Legal Plaza, Suite 500<br>New York, NY 10001</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>(555) 123-4567</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@bridgelegal.com</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Christopher R. Bridge &amp; Co. Law Firm. All rights reserved.</p>
+        <p class="footer-disclaimer">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" style="position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--navy-dark);border:none;cursor:pointer;font-size:1rem;box-shadow:0 4px 20px rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;transform:translateY(80px);opacity:0;transition:all 0.4s ease;z-index:500;">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+  <style>#scrollTop.visible{transform:translateY(0);opacity:1;}</style>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    BridgeAPI.getAllData().catch(() => getSiteData()).then(data => {
+      const container = document.getElementById('practiceDetailContainer');
+      const highlights = [
+        ['M&A Transactions','Corporate Governance','Securities Law','Regulatory Compliance'],
+        ['Commercial Disputes','Federal Court','Class Actions','Appeals'],
+        ['Property Acquisitions','Commercial Leasing','Land Use & Zoning','Development'],
+        ['Divorce Proceedings','Child Custody','Adoption','Prenuptial Agreements'],
+        ['Wrongful Termination','Discrimination Claims','Executive Agreements','HR Compliance'],
+        ['Work Visas','Green Cards','Naturalization','Deportation Defense'],
+        ['Federal Defense','White-Collar Crime','DUI Defense','Appeals'],
+        ['Fractional GC','Risk Management','Board Advisory','Regulatory Strategy'],
+        ['Wills & Trusts','Probate Administration','Tax Planning','Asset Protection'],
+        ['Commercial Contracts','Dispute Resolution','Negotiation','Enforcement']
+      ];
+
+      container.innerHTML = data.practiceAreas.map((p, i) => `
+        <div class="area-detail-card reveal">
+          <div class="area-card-visual" style="position:relative; overflow:hidden;">
+            <span class="area-num">${String(i+1).padStart(2,'0')}</span>
+            <i class="fa-solid ${p.icon} big-icon"></i>
+            <h3 style="font-family:var(--font-serif);color:white;font-size:1.1rem;text-align:center;">${p.title}</h3>
+          </div>
+          <div class="area-card-body">
+            <span class="area-tag"><i class="fa-solid fa-gavel"></i> Legal Services</span>
+            <h2>${p.title}</h2>
+            <p>${p.description}</p>
+            <div class="highlights">
+              ${(highlights[i] || highlights[0]).map(h => `
+                <span class="highlight-chip"><i class="fa-solid fa-check"></i>${h}</span>
+              `).join('')}
+            </div>
+            <div style="margin-top:24px;">
+              <a href="index.html#contact" class="btn btn--navy" style="font-size:0.84rem;padding:11px 22px;">
+                <i class="fa-solid fa-envelope"></i> Discuss Your Matter
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

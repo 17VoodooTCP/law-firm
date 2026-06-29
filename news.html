@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Latest legal news, insights, and firm announcements from Christopher R. Bridge & Co. Law Firm.">
+  <title>News & Insights | Christopher R. Bridge & Co. Law Firm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .news-hero-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 50px;
+      border: 1px solid var(--gray-200);
+    }
+    .news-hero-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    .news-hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .news-hero-card:hover .news-hero-img img { transform: scale(1.04); }
+    .news-hero-body {
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .news-hero-body .cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      background: rgba(201,168,76,0.1);
+      padding: 5px 14px;
+      border-radius: 30px;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+    .news-hero-body h2 {
+      font-family: var(--font-serif);
+      color: var(--navy);
+      font-size: 1.7rem;
+      line-height: 1.3;
+      margin-bottom: 18px;
+    }
+    .news-hero-body p {
+      color: var(--text-light);
+      line-height: 1.8;
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+    }
+
+    .news-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .news-mini-card {
+      display: flex;
+      gap: 16px;
+      background: white;
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .news-mini-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
+    .news-mini-thumb {
+      width: 80px; height: 80px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .news-mini-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .news-mini-info {}
+    .news-mini-info .cat { font-size: 0.68rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+    .news-mini-info h4 { font-family: var(--font-serif); font-size: 0.92rem; color: var(--navy); line-height: 1.35; margin-bottom: 6px; }
+    .news-mini-info .date { font-size: 0.74rem; color: var(--gray-400); }
+
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .cat-btn {
+      padding: 8px 18px;
+      border-radius: 30px;
+      border: 1.5px solid var(--gray-200);
+      background: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .cat-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .cat-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+
+    @media (max-width: 768px) {
+      .news-hero-card { grid-template-columns: 1fr; }
+      .news-hero-body { padding: 30px 24px; }
+      .news-hero-img { min-height: 240px; }
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img">
+        <div class="nav-logo-divider"></div>
+        <div class="nav-logo-text">
+          <span class="logo-primary">Christopher R. Bridge &amp; Co.</span>
+          <span class="logo-secondary">Barrister, Solicitor &amp; Legal Consultant</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="practice-areas.html">Practice Areas</a>
+        <a href="attorneys.html">Our Team</a>
+        <a href="news.html" class="active">News &amp; Insights</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+        <span>News &amp; Insights</span>
+      </div>
+      <h1>News &amp; Legal Insights</h1>
+      <p>Stay informed with the latest firm announcements, legal developments, case results, and industry analysis from our team of experts.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED NEWS -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:40px;">
+        <div class="section-label">Featured</div>
+        <h2 class="section-title">Latest from the Firm</h2>
+        <div class="gold-divider"></div>
+      </div>
+
+      <!-- Featured Article -->
+      <div class="news-hero-card reveal" id="featuredArticle"></div>
+
+      <!-- Category filter -->
+      <div class="category-filter reveal" id="categoryFilter"></div>
+
+      <!-- All articles grid -->
+      <div class="news-grid" id="allNewsGrid"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER STRIP -->
+  <section class="stats-section" style="padding:70px 0;">
+    <div class="container" style="text-align:center;position:relative;z-index:1;">
+      <div class="section-label" style="justify-content:center;color:var(--gold-light);">Stay Informed</div>
+      <h2 style="font-family:var(--font-serif);color:white;font-size:2rem;margin:16px 0 16px;">
+        Receive Legal Updates Directly
+      </h2>
+      <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 36px;line-height:1.75;font-size:0.92rem;">
+        To receive our latest legal insights and firm announcements, please contact us and request to be added to our mailing list.
+      </p>
+      <a href="index.html#contact" class="btn btn--gold" style="font-size:1rem;padding:16px 36px;">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Christopher R. Bridge &amp; Co.</div>
+          <div class="footer-logo-sub">Barrister, Solicitor &amp; Legal Consultant</div>
+          <p class="footer-desc">Legal insights and firm news since 1991.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Practice Areas</a></li>
+            <li><a href="attorneys.html"><i class="fa-solid fa-chevron-right"></i> Our Team</a></li>
+            <li><a href="careers.html"><i class="fa-solid fa-chevron-right"></i> Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Firm News</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Legal Insights</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Case Results</a></li>
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Industry Updates</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>123 Legal Plaza, Suite 500<br>New York, NY 10001</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>(555) 123-4567</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@bridgelegal.com</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Christopher R. Bridge &amp; Co. Law Firm. All rights reserved.</p>
+        <p class="footer-disclaimer">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" style="position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--navy-dark);border:none;cursor:pointer;font-size:1rem;box-shadow:0 4px 20px rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;transform:translateY(80px);opacity:0;transition:all 0.4s ease;z-index:500;">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+  <style>#scrollTop.visible{transform:translateY(0);opacity:1;}</style>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  BridgeAPI.getAllData().catch(() => getSiteData()).then(data => {
+    const imgs = [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80',
+      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80',
+      'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80'
+    ];
+
+    const featured = data.news[0];
+    document.getElementById('featuredArticle').innerHTML = `
+      <div class="news-hero-img">
+        <img src="${imgs[0]}" alt="${featured.title}">
+      </div>
+      <div class="news-hero-body">
+        <span class="cat"><i class="fa-solid fa-tag"></i>${featured.category}</span>
+        <h2>${featured.title}</h2>
+        <p>${featured.content}</p>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span style="font-size:0.78rem;color:var(--gray-400);display:flex;align-items:center;gap:6px;">
+            <i class="fa-regular fa-calendar"></i>${featured.date}
+          </span>
+        </div>
+      </div>
+    `;
+
+    // Category filter
+    const cats = ['All', ...new Set(data.news.map(n => n.category))];
+    const filterEl = document.getElementById('categoryFilter');
+    filterEl.innerHTML = cats.map((c, i) => `
+      <button class="cat-btn${i===0?' active':''}" data-cat="${c}">${c}</button>
+    `).join('');
+
+    function renderNews(filter) {
+      const articles = filter === 'All' ? data.news : data.news.filter(n => n.category === filter);
+      document.getElementById('allNewsGrid').innerHTML = articles.map((n, i) => `
+        <div class="news-card reveal">
+          <div class="news-card-img">
+            <img src="${imgs[i % imgs.length]}" alt="${n.title}" loading="lazy">
+            <span class="news-category">${n.category}</span>
+          </div>
+          <div class="news-card-body">
+            <div class="news-date"><i class="fa-regular fa-calendar"></i> ${n.date}</div>
+            <h3>${n.title}</h3>
+            <p>${n.excerpt}</p>
+            <span class="news-link" style="cursor:pointer;">Read More <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderNews('All');
+
+    filterEl.addEventListener('click', e => {
+      const btn = e.target.closest('.cat-btn');
+      if (!btn) return;
+      filterEl.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderNews(btn.dataset.cat);
+    });
+  });
+  </script>
+</body>
+</html>

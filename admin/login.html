@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Christopher R. Bridge & Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #C9A84C;
+      --gold-dark: #A8832A;
+      --navy: #1B2B5E;
+      --navy-dark: #0F1A3D;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 20%, rgba(27,43,94,0.6) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 50px 44px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 1;
+    }
+    .login-brand {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .login-brand img {
+      height: 64px;
+      width: auto;
+      margin-bottom: 16px;
+    }
+    .login-brand h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+    }
+    .login-brand p {
+      font-size: 0.78rem;
+      color: var(--gold-dark);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .login-divider {
+      height: 1px;
+      background: #e8e8e8;
+      margin-bottom: 32px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 7px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+    input {
+      width: 100%;
+      padding: 12px 14px 12px 38px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: #222;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+      background: white;
+    }
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-login:hover { background: var(--navy-dark); transform: translateY(-1px); }
+    .btn-login:active { transform: translateY(0); }
+    .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .error-msg {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      margin-bottom: 18px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .error-msg.show { display: flex; }
+    .back-link {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .back-link a { color: var(--gold-dark); text-decoration: none; font-weight: 600; }
+    .back-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-brand">
+      <img src="../images/logo.svg" alt="CR Bridge Logo">
+      <h1>Admin Portal</h1>
+      <p>Christopher R. Bridge &amp; Co.</p>
+    </div>
+    <div class="login-divider"></div>
+
+    <div class="error-msg" id="errorMsg">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span id="errorText">Invalid credentials. Please try again.</span>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="username" placeholder="admin" autocomplete="username" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+      </div>
+      <button type="submit" class="btn-login" id="loginBtn">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        Sign In
+      </button>
+    </form>
+
+    <div class="back-link">
+      <a href="../index.html"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script>
+    // If already logged in, redirect to dashboard
+    if (sessionStorage.getItem('adminToken')) {
+      location.href = 'index.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const errorEl = document.getElementById('errorMsg');
+      const errorText = document.getElementById('errorText');
+
+      errorEl.classList.remove('show');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Signing in...';
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch(window.BRIDGE_API + '/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Login failed');
+        sessionStorage.setItem('adminToken', data.token);
+        location.href = 'index.html';
+      } catch (err) {
+        errorText.textContent = err.message;
+        errorEl.classList.add('show');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';
+      }
+    });
+  </script>
+</body>
+</html>

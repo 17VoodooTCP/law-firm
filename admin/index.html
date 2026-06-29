@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Dashboard | Christopher R. Bridge & Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body { background: var(--gray-50); }
+
+    /* Mini chart bars */
+    .sparkbar { display: flex; align-items: flex-end; gap: 3px; height: 40px; }
+    .sparkbar span { flex: 1; background: var(--gold); border-radius: 2px; opacity: 0.7; }
+
+    /* Image preview */
+    .img-preview {
+      width: 100%; height: 160px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--gray-100);
+      border: 2px dashed var(--gray-300);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+    .img-preview:hover { border-color: var(--navy); }
+    .img-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .img-preview .upload-hint {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--gray-400); font-size: 0.82rem; pointer-events: none;
+    }
+    .img-preview .upload-hint i { font-size: 1.8rem; }
+
+    /* Quick stat mini */
+    .mini-stat { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+
+    /* Activity feed */
+    .activity-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gold); margin-top: 5px; flex-shrink: 0;
+    }
+    .activity-dot--navy { background: var(--navy); }
+    .activity-dot--green { background: #10b981; }
+    .activity-text { font-size: 0.83rem; color: var(--text); line-height: 1.5; }
+    .activity-time { font-size: 0.72rem; color: var(--gray-400); margin-top: 2px; }
+
+    /* Toggle switch */
+    .toggle-wrap { display: flex; align-items: center; gap: 10px; }
+    .toggle {
+      position: relative; width: 44px; height: 24px;
+      background: var(--gray-300); border-radius: 12px;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .toggle.on { background: var(--navy); }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      background: white; border-radius: 50%;
+      transition: left 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .toggle.on::after { left: 23px; }
+    .toggle-label { font-size: 0.85rem; color: var(--text); }
+
+    /* Color picker row */
+    .color-row { display: flex; gap: 10px; align-items: center; }
+    .color-swatch {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 2px solid transparent; cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .color-swatch:hover, .color-swatch.active { border-color: var(--navy); transform: scale(1.1); }
+
+    /* Sidebar mobile toggle */
+    .sidebar-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 99;
+    }
+    .sidebar-overlay.open { display: block; }
+
+    .mobile-menu-btn {
+      display: none;
+      background: var(--navy);
+      color: white;
+      border: none;
+      width: 40px; height: 40px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 1024px) { .mobile-menu-btn { display: flex; } }
+
+    .section-divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin: 24px 0;
+    }
+
+    .pill-nav {
+      display: flex; gap: 6px; margin-bottom: 24px;
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 0;
+    }
+    .pill-nav-btn {
+      padding: 10px 18px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: var(--font-sans);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .pill-nav-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+    .pill-nav-btn:hover { color: var(--navy); }
+
+    .sub-panel { display: none; }
+    .sub-panel.active { display: block; }
+  </style>
+</head>
+<body class="admin-body">
+
+<!-- Sidebar overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div class="admin-layout">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-logo">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <img src="../images/logo.svg" alt="CR Logo" style="height:44px;width:44px;object-fit:contain;mix-blend-mode:multiply;filter:brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(5deg);opacity:0.85;">
+        <div>
+          <div class="logo">Christopher R. Bridge &amp; Co.</div>
+          <div class="sub">Admin Dashboard</div>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="admin-nav-section">
+        <div class="admin-nav-section-label">Overview</div>
+        <div class="admin-nav-item active" data-panel="dashboard">
+          <i class="fa-solid fa-gauge"></i> Dashboard
+        </div>
+      </div>
+
+      <div class="admin-nav-section">
+        <div class="admin-nav-section-label">Content</div>
+        <div class="admin-nav-item" data-panel="firm">
+          <i class="fa-solid fa-building-columns"></i> Firm Settings
+        </div>
+        <div class="admin-nav-item" data-panel="attorneys">
+          <i class="fa-solid fa-user-tie"></i> Attorney Profiles
+        </div>
+        <div class="admin-nav-item" data-panel="practice">
+          <i class="fa-solid fa-scale-balanced"></i> Practice Areas
+        </div>
+        <div class="admin-nav-item" data-panel="news">
+          <i class="fa-solid fa-newspaper"></i> News &amp; Insights
+        </div>
+        <div class="admin-nav-item" data-panel="testimonials">
+          <i class="fa-solid fa-quote-left"></i> Testimonials
+        </div>
+        <div class="admin-nav-item" data-panel="careers">
+          <i class="fa-solid fa-briefcase"></i> Careers
+        </div>
+        <div class="admin-nav-item" data-panel="stats">
+          <i class="fa-solid fa-chart-bar"></i> Statistics
+        </div>
+      </div>
+
+      <div class="admin-nav-section">
+        <div class="admin-nav-section-label">System</div>
+        <div class="admin-nav-item" data-panel="settings">
+          <i class="fa-solid fa-gear"></i> Site Settings
+        </div>
+      </div>
+    </nav>
+
+    <div style="margin-top:auto;padding:20px 24px;border-top:1px solid rgba(255,255,255,0.08);">
+      <a href="../index.html" style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.5);font-size:0.82rem;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+        <i class="fa-solid fa-arrow-left"></i> Return to Website
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="admin-user">
+        <div class="admin-avatar">CB</div>
+        <span>Administrator</span>
+        <button onclick="BridgeAPI.logout()" title="Log out" style="margin-left:12px;background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1rem;padding:4px 8px;border-radius:6px;transition:color 0.2s;" onmouseover="this.style.color='#dc2626'" onmouseout="this.style.color='var(--text-light)'">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Content area -->
+    <div class="admin-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="admin-panel active" id="panel-dashboard">
+        <div class="admin-cards-row">
+          <div class="admin-card-stat">
+            <div class="stat-info">
+              <div class="stat-label">Total Attorneys</div>
+              <div class="stat-value" id="ds-attorneys">6</div>
+            </div>
+            <div class="stat-icon stat-icon--navy"><i class="fa-solid fa-user-tie"></i></div>
+          </div>
+          <div class="admin-card-stat">
+            <div class="stat-info">
+              <div class="stat-label">News Articles</div>
+              <div class="stat-value" id="ds-news">4</div>
+            </div>
+            <div class="stat-icon stat-icon--gold"><i class="fa-solid fa-newspaper"></i></div>
+          </div>
+          <div class="admin-card-stat">
+            <div class="stat-info">
+              <div class="stat-label">Practice Areas</div>
+              <div class="stat-value" id="ds-practice">10</div>
+            </div>
+            <div class="stat-icon stat-icon--green"><i class="fa-solid fa-scale-balanced"></i></div>
+          </div>
+          <div class="admin-card-stat">
+            <div class="stat-info">
+              <div class="stat-label">Testimonials</div>
+              <div class="stat-value" id="ds-testimonials">5</div>
+            </div>
+            <div class="stat-icon stat-icon--red"><i class="fa-solid fa-star"></i></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:24px;">
+          <!-- Quick Edit -->
+          <div class="admin-section-card">
+            <div class="admin-section-card-header">
+              <h3><i class="fa-solid fa-bolt" style="color:var(--gold);margin-right:8px;"></i>Quick Actions</h3>
+            </div>
+            <div class="admin-section-card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <button class="btn btn--navy" style="font-size:0.82rem;padding:12px;" onclick="switchPanel('attorneys')">
+                  <i class="fa-solid fa-plus"></i> Add Attorney
+                </button>
+                <button class="btn btn--navy" style="font-size:0.82rem;padding:12px;" onclick="switchPanel('news')">
+                  <i class="fa-solid fa-plus"></i> Add News Article
+                </button>
+                <button class="btn btn--outline" style="font-size:0.82rem;padding:12px;" onclick="switchPanel('firm')">
+                  <i class="fa-solid fa-pen"></i> Edit Firm Info
+                </button>
+                <button class="btn btn--outline" style="font-size:0.82rem;padding:12px;" onclick="switchPanel('testimonials')">
+                  <i class="fa-solid fa-pen"></i> Edit Testimonials
+                </button>
+                <button class="btn btn--outline" style="font-size:0.82rem;padding:12px;" onclick="switchPanel('stats')">
+                  <i class="fa-solid fa-chart-bar"></i> Update Statistics
+                </button>
+                <button class="btn btn--outline" style="font-size:0.82rem;padding:12px;color:#dc2626;border-color:#dc2626;" onclick="confirmReset()">
+                  <i class="fa-solid fa-rotate-left"></i> Reset All Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity -->
+          <div class="admin-section-card">
+            <div class="admin-section-card-header">
+              <h3><i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);margin-right:8px;"></i>Recent Activity</h3>
+            </div>
+            <div class="admin-section-card-body" style="padding-top:8px;">
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">Attorney profile updated — <strong>Sarah M. Holloway</strong></div>
+                  <div class="activity-time">2 minutes ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot activity-dot--navy"></div>
+                <div>
+                  <div class="activity-text">New article published — <em>SEC Regulations 2026</em></div>
+                  <div class="activity-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot activity-dot--green"></div>
+                <div>
+                  <div class="activity-text">Testimonial added — <strong>Richard Ashworth</strong></div>
+                  <div class="activity-time">3 hours ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">Firm contact information updated</div>
+                  <div class="activity-time">Yesterday</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot activity-dot--navy"></div>
+                <div>
+                  <div class="activity-text">Statistics counters updated</div>
+                  <div class="activity-time">2 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FIRM SETTINGS ── -->
+      <div class="admin-panel" id="panel-firm">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Firm Contact Information</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="saveFirm()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+          <div class="admin-section-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Firm Name</label>
+                <input class="form-input" id="f-name" type="text">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tagline</label>
+                <input class="form-input" id="f-tagline" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sub-Tagline</label>
+              <input class="form-input" id="f-subtagline" type="text">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input class="form-input" id="f-phone" type="text">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input class="form-input" id="f-email" type="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Office Address</label>
+              <input class="form-input" id="f-address" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Office Hours</label>
+              <input class="form-input" id="f-hours" type="text">
+            </div>
+            <div class="section-divider"></div>
+            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:16px;">Social Media Links</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label"><i class="fa-brands fa-linkedin" style="color:var(--gold);"></i> LinkedIn URL</label>
+                <input class="form-input" id="f-linkedin" type="url" placeholder="https://linkedin.com/company/...">
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fa-brands fa-x-twitter" style="color:var(--gold);"></i> Twitter/X URL</label>
+                <input class="form-input" id="f-twitter" type="url" placeholder="https://x.com/...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label"><i class="fa-brands fa-facebook" style="color:var(--gold);"></i> Facebook URL</label>
+                <input class="form-input" id="f-facebook" type="url" placeholder="https://facebook.com/...">
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fa-brands fa-instagram" style="color:var(--gold);"></i> Instagram URL</label>
+                <input class="form-input" id="f-instagram" type="url" placeholder="https://instagram.com/...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ATTORNEYS ── -->
+      <div class="admin-panel" id="panel-attorneys">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Attorney Profiles</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="openAttorneyModal(null)">
+              <i class="fa-solid fa-plus"></i> Add Attorney
+            </button>
+          </div>
+          <div class="admin-section-card-body" style="padding:0;overflow:auto;">
+            <table class="admin-table" id="attorneysTable">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Title</th>
+                  <th>Practice Area</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attorneysTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PRACTICE AREAS ── -->
+      <div class="admin-panel" id="panel-practice">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Practice Areas</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="saveAllPractice()">
+              <i class="fa-solid fa-floppy-disk"></i> Save All Changes
+            </button>
+          </div>
+          <div class="admin-section-card-body">
+            <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:20px;">
+              Edit the title and description for each practice area below.
+            </p>
+            <div id="practiceEditList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NEWS ── -->
+      <div class="admin-panel" id="panel-news">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>News &amp; Insights</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="openNewsModal(null)">
+              <i class="fa-solid fa-plus"></i> New Article
+            </button>
+          </div>
+          <div class="admin-section-card-body" style="padding:0;overflow:auto;">
+            <table class="admin-table" id="newsTable">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Title</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="newsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TESTIMONIALS ── -->
+      <div class="admin-panel" id="panel-testimonials">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Testimonials</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="openTestimonialModal(null)">
+              <i class="fa-solid fa-plus"></i> Add Testimonial
+            </button>
+          </div>
+          <div class="admin-section-card-body" style="padding:0;overflow:auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Title</th>
+                  <th>Rating</th>
+                  <th>Preview</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="testimonialsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CAREERS ── -->
+      <div class="admin-panel" id="panel-careers">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Career Listings</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="openCareerModal(null)">
+              <i class="fa-solid fa-plus"></i> Add Position
+            </button>
+          </div>
+          <div class="admin-section-card-body" style="padding:0;overflow:auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Position</th>
+                  <th>Type</th>
+                  <th>Location</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="careersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STATISTICS ── -->
+      <div class="admin-panel" id="panel-stats">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Homepage Statistics</h3>
+            <button class="btn btn--gold" style="font-size:0.8rem;padding:9px 18px;" onclick="saveStats()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+          <div class="admin-section-card-body">
+            <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:20px;">
+              Update the animated counter values displayed on the homepage statistics section.
+            </p>
+            <div id="statsEditList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="admin-panel" id="panel-settings">
+        <div class="admin-section-card">
+          <div class="admin-section-card-header">
+            <h3>Site Settings</h3>
+          </div>
+          <div class="admin-section-card-body">
+            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:16px;">Display Settings</h4>
+            <div style="display:flex;flex-direction:column;gap:18px;">
+              <div class="toggle-wrap">
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                <span class="toggle-label">Show attorney bio on hover (desktop)</span>
+              </div>
+              <div class="toggle-wrap">
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                <span class="toggle-label">Enable smooth scroll animations</span>
+              </div>
+              <div class="toggle-wrap">
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                <span class="toggle-label">Show statistics section on homepage</span>
+              </div>
+              <div class="toggle-wrap">
+                <div class="toggle" onclick="this.classList.toggle('on')"></div>
+                <span class="toggle-label">Maintenance mode (hide website from public)</span>
+              </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:16px;">Hero Carousel Speed</h4>
+            <div class="form-group" style="max-width:300px;">
+              <label class="form-label">Interval (seconds)</label>
+              <input class="form-input" type="number" value="5" min="3" max="15">
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:16px;">Data Management</h4>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <button class="btn btn--navy" style="font-size:0.84rem;" onclick="exportData()">
+                <i class="fa-solid fa-download"></i> Export All Data (JSON)
+              </button>
+              <button class="btn btn--outline" style="font-size:0.84rem;color:#dc2626;border-color:#dc2626;" onclick="confirmReset()">
+                <i class="fa-solid fa-rotate-left"></i> Reset to Defaults
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- ══════ MODALS ══════ -->
+
+<!-- Attorney Modal -->
+<div class="modal-overlay" id="attorneyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="attorneyModalTitle">Add Attorney</h3>
+      <button class="modal-close" onclick="closeModal('attorneyModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="atty-id">
+      <div class="form-group">
+        <label class="form-label">Photo URL</label>
+        <input class="form-input" id="atty-image" type="url" placeholder="https://...">
+        <div style="margin-top:10px;" id="attyImgPreviewWrap">
+          <img id="attyImgPreview" src="" alt="" style="height:100px;border-radius:8px;display:none;">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="atty-name" type="text" placeholder="e.g. Jane A. Smith">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Title / Position</label>
+          <input class="form-input" id="atty-title" type="text" placeholder="e.g. Senior Partner">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Practice Area(s)</label>
+        <input class="form-input" id="atty-area" type="text" placeholder="e.g. Corporate Law · Business Advisory">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Biography</label>
+        <textarea class="form-textarea" id="atty-bio" rows="5" placeholder="Attorney biography..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--outline" onclick="closeModal('attorneyModal')" style="font-size:0.85rem;">Cancel</button>
+      <button class="btn btn--gold" onclick="saveAttorney()" style="font-size:0.85rem;">
+        <i class="fa-solid fa-floppy-disk"></i> Save Attorney
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- News Modal -->
+<div class="modal-overlay" id="newsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="newsModalTitle">Add News Article</h3>
+      <button class="modal-close" onclick="closeModal('newsModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="news-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Publication Date</label>
+          <input class="form-input" id="news-date" type="text" placeholder="e.g. June 27, 2026">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="news-cat">
+            <option>Firm News</option>
+            <option>Legal Insights</option>
+            <option>Case Results</option>
+            <option>Industry Update</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Article Title</label>
+        <input class="form-input" id="news-title" type="text" placeholder="Headline...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Excerpt (shown in card)</label>
+        <textarea class="form-textarea" id="news-excerpt" rows="3" placeholder="Brief summary..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Article Content</label>
+        <textarea class="form-textarea" id="news-content" rows="6" placeholder="Full article text..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--outline" onclick="closeModal('newsModal')" style="font-size:0.85rem;">Cancel</button>
+      <button class="btn btn--gold" onclick="saveNews()" style="font-size:0.85rem;">
+        <i class="fa-solid fa-floppy-disk"></i> Publish Article
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonial Modal -->
+<div class="modal-overlay" id="testimonialModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="testimonialModalTitle">Add Testimonial</h3>
+      <button class="modal-close" onclick="closeModal('testimonialModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="test-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Client Name</label>
+          <input class="form-input" id="test-name" type="text" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Client Title / Company</label>
+          <input class="form-input" id="test-title" type="text" placeholder="e.g. CEO, Acme Corp">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rating (1–5)</label>
+        <select class="form-select" id="test-rating">
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★ (4)</option>
+          <option value="3">★★★ (3)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Testimonial Text</label>
+        <textarea class="form-textarea" id="test-text" rows="5" placeholder="Client review..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--outline" onclick="closeModal('testimonialModal')" style="font-size:0.85rem;">Cancel</button>
+      <button class="btn btn--gold" onclick="saveTestimonial()" style="font-size:0.85rem;">
+        <i class="fa-solid fa-floppy-disk"></i> Save Testimonial
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Career Modal -->
+<div class="modal-overlay" id="careerModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="careerModalTitle">Add Position</h3>
+      <button class="modal-close" onclick="closeModal('careerModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="career-id">
+      <div class="form-group">
+        <label class="form-label">Position Title</label>
+        <input class="form-input" id="career-title" type="text" placeholder="e.g. Senior Associate – Corporate Law">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Employment Type</label>
+          <select class="form-select" id="career-type">
+            <option>Full-Time</option>
+            <option>Part-Time</option>
+            <option>Contract</option>
+            <option>Internship</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input class="form-input" id="career-location" type="text" placeholder="e.g. New York, NY">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Position Description</label>
+        <textarea class="form-textarea" id="career-desc" rows="4" placeholder="Role description and requirements..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--outline" onclick="closeModal('careerModal')" style="font-size:0.85rem;">Cancel</button>
+      <button class="btn btn--gold" onclick="saveCareer()" style="font-size:0.85rem;">
+        <i class="fa-solid fa-floppy-disk"></i> Save Position
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Save notification -->
+<div class="save-notification" id="saveNotif">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="saveNotifMsg">Changes saved successfully!</span>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   ADMIN DASHBOARD CONTROLLER — API Edition
+══════════════════════════════════════════ */
+
+let siteData = { firm: {}, stats: [], attorneys: [], practiceAreas: [], testimonials: [], news: [], careers: [] };
+
+// Auth guard — redirect to login if no token
+(async function init() {
+  const token = sessionStorage.getItem('adminToken');
+  if (!token) { location.href = 'login.html'; return; }
+  const valid = await BridgeAPI.verifyToken();
+  if (!valid) { location.href = 'login.html'; return; }
+  try {
+    siteData = await BridgeAPI.getAllData();
+    populateDashboard();
+  } catch (err) {
+    showNotification('⚠ Could not connect to server: ' + err.message);
+  }
+})();
+
+// ── NAVIGATION ──
+function switchPanel(name) {
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.querySelector(`[data-panel="${name}"]`).classList.add('active');
+  document.getElementById('pageTitle').textContent = {
+    dashboard:'Dashboard', firm:'Firm Settings', attorneys:'Attorney Profiles',
+    practice:'Practice Areas', news:'News & Insights', testimonials:'Testimonials',
+    careers:'Careers', stats:'Statistics', settings:'Site Settings'
+  }[name] || 'Dashboard';
+  populatePanel(name);
+  if (window.innerWidth < 1024) toggleSidebar(false);
+}
+
+document.querySelectorAll('.admin-nav-item').forEach(item => {
+  item.addEventListener('click', () => switchPanel(item.dataset.panel));
+});
+
+function toggleSidebar(force) {
+  const sidebar = document.getElementById('adminSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const open = force !== undefined ? force : !sidebar.classList.contains('open');
+  sidebar.classList.toggle('open', open);
+  overlay.classList.toggle('open', open);
+}
+
+// ── POPULATE PANELS ──
+function populatePanel(name) {
+  switch(name) {
+    case 'dashboard':   populateDashboard(); break;
+    case 'firm':        populateFirm(); break;
+    case 'attorneys':   populateAttorneys(); break;
+    case 'practice':    populatePractice(); break;
+    case 'news':        populateNews(); break;
+    case 'testimonials':populateTestimonials(); break;
+    case 'careers':     populateCareers(); break;
+    case 'stats':       populateStats(); break;
+  }
+}
+
+function populateDashboard() {
+  document.getElementById('ds-attorneys').textContent   = siteData.attorneys.length;
+  document.getElementById('ds-news').textContent        = siteData.news.length;
+  document.getElementById('ds-practice').textContent    = siteData.practiceAreas.length;
+  document.getElementById('ds-testimonials').textContent = siteData.testimonials.length;
+}
+
+function populateFirm() {
+  const f = siteData.firm;
+  document.getElementById('f-name').value      = f.name;
+  document.getElementById('f-tagline').value   = f.tagline;
+  document.getElementById('f-subtagline').value= f.subtagline;
+  document.getElementById('f-phone').value     = f.phone;
+  document.getElementById('f-email').value     = f.email;
+  document.getElementById('f-address').value   = f.address;
+  document.getElementById('f-hours').value     = f.hours;
+  document.getElementById('f-linkedin').value  = f.linkedin || '';
+  document.getElementById('f-twitter').value   = f.twitter  || '';
+  document.getElementById('f-facebook').value  = f.facebook || '';
+  document.getElementById('f-instagram').value = f.instagram|| '';
+}
+
+function populateAttorneys() {
+  document.getElementById('attorneysTableBody').innerHTML =
+    siteData.attorneys.map(a => `
+      <tr>
+        <td><img src="${a.image}" alt="${a.name}" class="attorney-thumb"></td>
+        <td><strong>${a.name}</strong></td>
+        <td><span class="badge badge--navy">${a.title}</span></td>
+        <td style="font-size:0.8rem;color:var(--text-light);max-width:200px;">${a.area}</td>
+        <td>
+          <div class="action-btns">
+            <button class="action-btn action-btn--edit" title="Edit" onclick="openAttorneyModal('${a._id}')"><i class="fa-solid fa-pen"></i></button>
+            <button class="action-btn action-btn--delete" title="Delete" onclick="deleteAttorney('${a._id}','${a.name.replace(/'/g,'\\x27')}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+}
+
+function populatePractice() {
+  document.getElementById('practiceEditList').innerHTML =
+    siteData.practiceAreas.map((p, i) => `
+      <div style="border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;background:var(--gray-50);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold-light);font-size:0.9rem;">
+            <i class="fa-solid ${p.icon}"></i>
+          </div>
+          <div class="form-group" style="margin:0;flex:1;">
+            <input class="form-input" id="pa-title-${i}" value="${p.title}" placeholder="Practice area title">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+          <label class="form-label">Short Description (card)</label>
+          <input class="form-input" id="pa-short-${i}" value="${p.short}">
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">Full Description (detail page)</label>
+          <textarea class="form-textarea" id="pa-desc-${i}" rows="3">${p.description}</textarea>
+        </div>
+      </div>
+    `).join('');
+}
+
+function populateNews() {
+  document.getElementById('newsTableBody').innerHTML =
+    siteData.news.map(n => `
+      <tr>
+        <td style="white-space:nowrap;font-size:0.8rem;color:var(--text-light);">${n.date}</td>
+        <td><span class="badge badge--gold">${n.category}</span></td>
+        <td style="max-width:280px;font-size:0.85rem;font-weight:500;">${n.title}</td>
+        <td>
+          <div class="action-btns">
+            <button class="action-btn action-btn--edit" onclick="openNewsModal('${n._id}')"><i class="fa-solid fa-pen"></i></button>
+            <button class="action-btn action-btn--delete" onclick="deleteNews('${n._id}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+}
+
+function populateTestimonials() {
+  document.getElementById('testimonialsTableBody').innerHTML =
+    siteData.testimonials.map(t => `
+      <tr>
+        <td><strong style="font-size:0.87rem;">${t.author}</strong></td>
+        <td style="font-size:0.8rem;color:var(--text-light);">${t.role}</td>
+        <td style="color:var(--gold);font-size:0.9rem;">${'★'.repeat(t.rating)}</td>
+        <td style="max-width:220px;font-size:0.8rem;color:var(--text-light);font-style:italic;">"${t.text.slice(0,80)}..."</td>
+        <td>
+          <div class="action-btns">
+            <button class="action-btn action-btn--edit" onclick="openTestimonialModal('${t._id}')"><i class="fa-solid fa-pen"></i></button>
+            <button class="action-btn action-btn--delete" onclick="deleteTestimonial('${t._id}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+}
+
+function populateCareers() {
+  document.getElementById('careersTableBody').innerHTML =
+    siteData.careers.map(c => `
+      <tr>
+        <td><strong style="font-size:0.87rem;">${c.title}</strong></td>
+        <td><span class="badge badge--green">${c.type}</span></td>
+        <td style="font-size:0.82rem;color:var(--text-light);">${c.location}</td>
+        <td>
+          <div class="action-btns">
+            <button class="action-btn action-btn--edit" onclick="openCareerModal('${c._id}')"><i class="fa-solid fa-pen"></i></button>
+            <button class="action-btn action-btn--delete" onclick="deleteCareer('${c._id}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+}
+
+function populateStats() {
+  document.getElementById('statsEditList').innerHTML =
+    siteData.stats.map((s, i) => `
+      <div style="display:grid;grid-template-columns:1fr 1fr 100px;gap:14px;align-items:end;margin-bottom:16px;padding:18px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200);">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">Label</label>
+          <input class="form-input" id="stat-label-${i}" value="${s.label}">
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">Value (number)</label>
+          <input class="form-input" id="stat-val-${i}" type="number" value="${s.value}">
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">Suffix</label>
+          <input class="form-input" id="stat-suf-${i}" value="${s.suffix}" placeholder="e.g. +">
+        </div>
+      </div>
+    `).join('');
+}
+
+// ── SAVE FUNCTIONS ──
+async function saveFirm() {
+  const firmData = {
+    name: document.getElementById('f-name').value,
+    tagline: document.getElementById('f-tagline').value,
+    subtagline: document.getElementById('f-subtagline').value,
+    phone: document.getElementById('f-phone').value,
+    email: document.getElementById('f-email').value,
+    address: document.getElementById('f-address').value,
+    hours: document.getElementById('f-hours').value,
+    linkedin: document.getElementById('f-linkedin').value,
+    twitter: document.getElementById('f-twitter').value,
+    facebook: document.getElementById('f-facebook').value,
+    instagram: document.getElementById('f-instagram').value
+  };
+  try {
+    siteData.firm = await BridgeAPI.updateFirm(firmData);
+    showNotification('Firm information updated!');
+    populateDashboard();
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+async function saveStats() {
+  const stats = siteData.stats.map((s, i) => ({
+    label:  document.getElementById(`stat-label-${i}`).value,
+    value:  parseInt(document.getElementById(`stat-val-${i}`).value, 10),
+    suffix: document.getElementById(`stat-suf-${i}`).value
+  }));
+  try {
+    await BridgeAPI.updateStats(stats);
+    siteData.stats = stats;
+    showNotification('Statistics updated!');
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+async function saveAllPractice() {
+  try {
+    await Promise.all(siteData.practiceAreas.map((p, i) =>
+      BridgeAPI.updatePracticeArea(p._id, {
+        title:       document.getElementById(`pa-title-${i}`).value,
+        short:       document.getElementById(`pa-short-${i}`).value,
+        description: document.getElementById(`pa-desc-${i}`).value
+      })
+    ));
+    siteData = await BridgeAPI.getAllData();
+    showNotification('Practice areas updated!');
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+// ── ATTORNEY CRUD ──
+let editingAttorneyId = null;
+
+function openAttorneyModal(id) {
+  editingAttorneyId = id;
+  const preview = document.getElementById('attyImgPreview');
+  document.getElementById('attorneyModalTitle').textContent = id ? 'Edit Attorney' : 'Add Attorney';
+  if (id) {
+    const a = siteData.attorneys.find(x => x._id === id);
+    document.getElementById('atty-id').value    = a._id;
+    document.getElementById('atty-name').value  = a.name;
+    document.getElementById('atty-title').value = a.title;
+    document.getElementById('atty-area').value  = a.area;
+    document.getElementById('atty-bio').value   = a.bio;
+    document.getElementById('atty-image').value = a.image;
+    preview.src = a.image; preview.style.display = 'block';
+  } else {
+    ['atty-id','atty-name','atty-title','atty-area','atty-bio','atty-image'].forEach(id => document.getElementById(id).value = '');
+    preview.style.display = 'none';
+  }
+  document.getElementById('attorneyModal').classList.add('open');
+}
+
+document.getElementById('atty-image').addEventListener('input', function() {
+  const p = document.getElementById('attyImgPreview');
+  if (this.value) { p.src = this.value; p.style.display = 'block'; }
+  else { p.style.display = 'none'; }
+});
+
+async function saveAttorney() {
+  const atty = {
+    name:  document.getElementById('atty-name').value.trim(),
+    title: document.getElementById('atty-title').value.trim(),
+    area:  document.getElementById('atty-area').value.trim(),
+    bio:   document.getElementById('atty-bio').value.trim(),
+    image: document.getElementById('atty-image').value.trim()
+  };
+  if (!atty.name) { alert('Please enter the attorney\'s name.'); return; }
+  try {
+    if (editingAttorneyId) {
+      await BridgeAPI.updateAttorney(editingAttorneyId, atty);
+      showNotification('Attorney updated!');
+    } else {
+      await BridgeAPI.createAttorney(atty);
+      showNotification('Attorney added!');
+    }
+    siteData.attorneys = await BridgeAPI.getAttorneys();
+    closeModal('attorneyModal');
+    populateAttorneys();
+    populateDashboard();
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+async function deleteAttorney(id, name) {
+  if (!confirm(`Remove "${name}" from the roster?`)) return;
+  try {
+    await BridgeAPI.deleteAttorney(id);
+    siteData.attorneys = siteData.attorneys.filter(a => a._id !== id);
+    populateAttorneys();
+    populateDashboard();
+    showNotification('Attorney removed.');
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+// ── NEWS CRUD ──
+let editingNewsId = null;
+
+function openNewsModal(id) {
+  editingNewsId = id;
+  document.getElementById('newsModalTitle').textContent = id ? 'Edit Article' : 'Add News Article';
+  if (id) {
+    const n = siteData.news.find(x => x._id === id);
+    document.getElementById('news-id').value      = n._id;
+    document.getElementById('news-date').value    = n.date;
+    document.getElementById('news-cat').value     = n.category;
+    document.getElementById('news-title').value   = n.title;
+    document.getElementById('news-excerpt').value = n.excerpt;
+    document.getElementById('news-content').value = n.content;
+  } else {
+    const today = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+    ['news-id','news-title','news-excerpt','news-content'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('news-date').value = today;
+  }
+  document.getElementById('newsModal').classList.add('open');
+}
+
+async function saveNews() {
+  const article = {
+    date:     document.getElementById('news-date').value.trim(),
+    category: document.getElementById('news-cat').value,
+    title:    document.getElementById('news-title').value.trim(),
+    excerpt:  document.getElementById('news-excerpt').value.trim(),
+    content:  document.getElementById('news-content').value.trim()
+  };
+  if (!article.title) { alert('Please enter an article title.'); return; }
+  try {
+    if (editingNewsId) {
+      await BridgeAPI.updateNews(editingNewsId, article);
+      showNotification('Article updated!');
+    } else {
+      await BridgeAPI.createNews(article);
+      showNotification('Article published!');
+    }
+    siteData.news = await BridgeAPI.getNews();
+    closeModal('newsModal');
+    populateNews();
+    populateDashboard();
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+async function deleteNews(id) {
+  if (!confirm('Delete this article?')) return;
+  try {
+    await BridgeAPI.deleteNews(id);
+    siteData.news = siteData.news.filter(n => n._id !== id);
+    populateNews();
+    populateDashboard();
+    showNotification('Article deleted.');
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+// ── TESTIMONIAL CRUD ──
+let editingTestId = null;
+
+function openTestimonialModal(id) {
+  editingTestId = id;
+  document.getElementById('testimonialModalTitle').textContent = id ? 'Edit Testimonial' : 'Add Testimonial';
+  if (id) {
+    const t = siteData.testimonials.find(x => x._id === id);
+    document.getElementById('test-id').value    = t._id;
+    document.getElementById('test-name').value  = t.author;
+    document.getElementById('test-title').value = t.role;
+    document.getElementById('test-rating').value= t.rating;
+    document.getElementById('test-text').value  = t.text;
+  } else {
+    ['test-id','test-name','test-title','test-text'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('test-rating').value = 5;
+  }
+  document.getElementById('testimonialModal').classList.add('open');
+}
+
+async function saveTestimonial() {
+  const t = {
+    author:  document.getElementById('test-name').value.trim(),
+    role:    document.getElementById('test-title').value.trim(),
+    rating:  parseInt(document.getElementById('test-rating').value, 10),
+    text:    document.getElementById('test-text').value.trim()
+  };
+  if (!t.author || !t.text) { alert('Please fill in name and testimonial text.'); return; }
+  try {
+    if (editingTestId) {
+      await BridgeAPI.updateTestimonial(editingTestId, t);
+      showNotification('Testimonial updated!');
+    } else {
+      await BridgeAPI.createTestimonial(t);
+      showNotification('Testimonial added!');
+    }
+    siteData.testimonials = await BridgeAPI.getTestimonials();
+    closeModal('testimonialModal');
+    populateTestimonials();
+    populateDashboard();
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+async function deleteTestimonial(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  try {
+    await BridgeAPI.deleteTestimonial(id);
+    siteData.testimonials = siteData.testimonials.filter(t => t._id !== id);
+    populateTestimonials();
+    populateDashboard();
+    showNotification('Testimonial removed.');
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+// ── CAREER CRUD ──
+let editingCareerId = null;
+
+function openCareerModal(id) {
+  editingCareerId = id;
+  document.getElementById('careerModalTitle').textContent = id ? 'Edit Position' : 'Add Position';
+  if (id) {
+    const c = siteData.careers.find(x => x._id === id);
+    document.getElementById('career-id').value       = c._id;
+    document.getElementById('career-title').value    = c.title;
+    document.getElementById('career-type').value     = c.type;
+    document.getElementById('career-location').value = c.location;
+    document.getElementById('career-desc').value     = c.description;
+  } else {
+    ['career-id','career-title','career-location','career-desc'].forEach(id => document.getElementById(id).value = '');
+  }
+  document.getElementById('careerModal').classList.add('open');
+}
+
+async function saveCareer() {
+  const c = {
+    title:       document.getElementById('career-title').value.trim(),
+    type:        document.getElementById('career-type').value,
+    location:    document.getElementById('career-location').value.trim(),
+    description: document.getElementById('career-desc').value.trim()
+  };
+  if (!c.title) { alert('Please enter a position title.'); return; }
+  try {
+    if (editingCareerId) {
+      await BridgeAPI.updateCareer(editingCareerId, c);
+      showNotification('Position updated!');
+    } else {
+      await BridgeAPI.createCareer(c);
+      showNotification('Position added!');
+    }
+    siteData.careers = await BridgeAPI.getCareers();
+    closeModal('careerModal');
+    populateCareers();
+    populateDashboard();
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+async function deleteCareer(id) {
+  if (!confirm('Remove this job listing?')) return;
+  try {
+    await BridgeAPI.deleteCareer(id);
+    siteData.careers = siteData.careers.filter(c => c._id !== id);
+    populateCareers();
+    populateDashboard();
+    showNotification('Position removed.');
+  } catch(e) { showNotification('Error: ' + e.message); }
+}
+
+// ── HELPERS ──
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+function showNotification(msg) {
+  const el = document.getElementById('saveNotif');
+  document.getElementById('saveNotifMsg').textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+async function confirmReset() {
+  if (!confirm('This will reseed the database with default data. Continue?')) return;
+  showNotification('Reset is done via the seed script on the server.');
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(siteData, null, 2)], { type: 'application/json' });
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(blob);
+  a.download = 'bridgelaw-data.json';
+  a.click();
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>

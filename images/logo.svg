@@ -1,0 +1,223 @@
+<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main gold gradient -->
+    <linearGradient id="gMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#F5E070"/>
+      <stop offset="25%"  stop-color="#D4A843"/>
+      <stop offset="55%"  stop-color="#8B6210"/>
+      <stop offset="80%"  stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#F0D060"/>
+    </linearGradient>
+    <!-- Leaf gradient — darker center for metallic depth -->
+    <linearGradient id="gLeaf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#C9A84C"/>
+      <stop offset="40%"  stop-color="#6B4A0A"/>
+      <stop offset="60%"  stop-color="#6B4A0A"/>
+      <stop offset="100%" stop-color="#C9A84C"/>
+    </linearGradient>
+    <!-- Arch tube gradient -->
+    <linearGradient id="gArch" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#F5E070"/>
+      <stop offset="45%"  stop-color="#8B6210"/>
+      <stop offset="100%" stop-color="#D4A843"/>
+    </linearGradient>
+    <!-- Text gradient -->
+    <linearGradient id="gText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#F0D060"/>
+      <stop offset="40%"  stop-color="#C9A84C"/>
+      <stop offset="75%"  stop-color="#8B6210"/>
+      <stop offset="100%" stop-color="#C9A84C"/>
+    </linearGradient>
+    <!-- Pan gradient -->
+    <radialGradient id="gPan" cx="50%" cy="30%" r="70%">
+      <stop offset="0%"   stop-color="#F5E070"/>
+      <stop offset="60%"  stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#8B6210"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ══════════════════════════════════
+       STAR  (top center)
+  ══════════════════════════════════ -->
+  <!-- Outer gold star -->
+  <polygon
+    points="150,2 154.5,13.5 167,13.5 157,20.5 160.5,32 150,25 139.5,32 143,20.5 133,13.5 145.5,13.5"
+    fill="url(#gMain)" stroke="#6B4A0A" stroke-width="0.6"/>
+  <!-- Inner hollow ring for the "open star" look -->
+  <polygon
+    points="150,7 153,15.5 161.5,15.5 155,20.5 157.5,29 150,24 142.5,29 145,20.5 138.5,15.5 147,15.5"
+    fill="none" stroke="#F5E070" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- ══════════════════════════════════
+       ARCH  (the curved bar)
+  ══════════════════════════════════ -->
+  <!-- Outer stroke (thick) for tube look -->
+  <path d="M 60,95 C 68,55 112,28 150,36 C 188,28 232,55 240,95"
+        stroke="#8B6210" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <!-- Inner highlight -->
+  <path d="M 60,95 C 68,55 112,28 150,36 C 188,28 232,55 240,95"
+        stroke="url(#gArch)" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- Top sheen -->
+  <path d="M 60,95 C 68,55 112,28 150,36 C 188,28 232,55 240,95"
+        stroke="#F5E070" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- ══════════════════════════════════
+       LEFT SCROLL CURL
+  ══════════════════════════════════ -->
+  <circle cx="57" cy="95" r="13" stroke="#8B6210"     stroke-width="6"   fill="none"/>
+  <circle cx="57" cy="95" r="13" stroke="url(#gMain)" stroke-width="4"   fill="none"/>
+  <circle cx="57" cy="95" r="13" stroke="#F5E070"     stroke-width="1.2" fill="none" opacity="0.4"/>
+  <circle cx="57" cy="95" r="5"  fill="url(#gMain)"/>
+
+  <!-- ══════════════════════════════════
+       RIGHT SCROLL CURL
+  ══════════════════════════════════ -->
+  <circle cx="243" cy="95" r="13" stroke="#8B6210"     stroke-width="6"   fill="none"/>
+  <circle cx="243" cy="95" r="13" stroke="url(#gMain)" stroke-width="4"   fill="none"/>
+  <circle cx="243" cy="95" r="13" stroke="#F5E070"     stroke-width="1.2" fill="none" opacity="0.4"/>
+  <circle cx="243" cy="95" r="5"  fill="url(#gMain)"/>
+
+  <!-- ══════════════════════════════════
+       LEFT SCALES OF JUSTICE
+  ══════════════════════════════════ -->
+  <!-- Vertical rod -->
+  <line x1="57" y1="108" x2="57" y2="124" stroke="#8B6210"     stroke-width="3.5"/>
+  <line x1="57" y1="108" x2="57" y2="124" stroke="url(#gMain)" stroke-width="2.5"/>
+  <!-- Horizontal beam -->
+  <line x1="24" y1="124" x2="90" y2="124" stroke="#8B6210"     stroke-width="5"   stroke-linecap="round"/>
+  <line x1="24" y1="124" x2="90" y2="124" stroke="url(#gMain)" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="24" y1="124" x2="90" y2="124" stroke="#F5E070"     stroke-width="1"   stroke-linecap="round" opacity="0.4"/>
+  <!-- Left chain -->
+  <line x1="24" y1="124" x2="15" y2="157" stroke="#8B6210"     stroke-width="2"/>
+  <line x1="24" y1="124" x2="15" y2="157" stroke="url(#gMain)" stroke-width="1.4"/>
+  <!-- Right chain -->
+  <line x1="90" y1="124" x2="99" y2="157" stroke="#8B6210"     stroke-width="2"/>
+  <line x1="90" y1="124" x2="99" y2="157" stroke="url(#gMain)" stroke-width="1.4"/>
+  <!-- Left pan (cup shape) -->
+  <path d="M 7,157 Q 11,170 15,157" stroke="#8B6210"     stroke-width="1.5" fill="url(#gPan)"/>
+  <line x1="7"  y1="157" x2="23" y2="157" stroke="#8B6210"     stroke-width="2"/>
+  <line x1="7"  y1="157" x2="23" y2="157" stroke="#F5E070"     stroke-width="0.8" opacity="0.4"/>
+  <!-- Right pan (cup shape) -->
+  <path d="M 91,157 Q 95,170 99,157" stroke="#8B6210" stroke-width="1.5" fill="url(#gPan)"/>
+  <line x1="91" y1="157" x2="107" y2="157" stroke="#8B6210" stroke-width="2"/>
+  <line x1="91" y1="157" x2="107" y2="157" stroke="#F5E070" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ══════════════════════════════════
+       RIGHT SCALES OF JUSTICE
+  ══════════════════════════════════ -->
+  <line x1="243" y1="108" x2="243" y2="124" stroke="#8B6210"     stroke-width="3.5"/>
+  <line x1="243" y1="108" x2="243" y2="124" stroke="url(#gMain)" stroke-width="2.5"/>
+  <line x1="210" y1="124" x2="276" y2="124" stroke="#8B6210"     stroke-width="5"   stroke-linecap="round"/>
+  <line x1="210" y1="124" x2="276" y2="124" stroke="url(#gMain)" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="210" y1="124" x2="276" y2="124" stroke="#F5E070"     stroke-width="1"   stroke-linecap="round" opacity="0.4"/>
+  <line x1="210" y1="124" x2="201" y2="157" stroke="#8B6210"     stroke-width="2"/>
+  <line x1="210" y1="124" x2="201" y2="157" stroke="url(#gMain)" stroke-width="1.4"/>
+  <line x1="276" y1="124" x2="285" y2="157" stroke="#8B6210"     stroke-width="2"/>
+  <line x1="276" y1="124" x2="285" y2="157" stroke="url(#gMain)" stroke-width="1.4"/>
+  <path d="M 193,157 Q 197,170 201,157" stroke="#8B6210" stroke-width="1.5" fill="url(#gPan)"/>
+  <line x1="193" y1="157" x2="209" y2="157" stroke="#8B6210" stroke-width="2"/>
+  <line x1="193" y1="157" x2="209" y2="157" stroke="#F5E070"  stroke-width="0.8" opacity="0.4"/>
+  <path d="M 277,157 Q 281,170 285,157" stroke="#8B6210" stroke-width="1.5" fill="url(#gPan)"/>
+  <line x1="277" y1="157" x2="293" y2="157" stroke="#8B6210" stroke-width="2"/>
+  <line x1="277" y1="157" x2="293" y2="157" stroke="#F5E070"  stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ══════════════════════════════════
+       LAUREL WREATH — Left stem
+  ══════════════════════════════════ -->
+  <path d="M 100,76 Q 84,118 90,170 Q 100,200 130,220"
+        stroke="#8B6210"     stroke-width="4"   fill="none" stroke-linecap="round"/>
+  <path d="M 100,76 Q 84,118 90,170 Q 100,200 130,220"
+        stroke="url(#gMain)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Left leaves (pointing outward-left) -->
+  <ellipse cx="90"  cy="83"  rx="13" ry="5.5" transform="rotate(-55 90 83)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="85"  cy="97"  rx="13" ry="5.5" transform="rotate(-46 85 97)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="81"  cy="112" rx="13" ry="5.5" transform="rotate(-35 81 112)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="80"  cy="127" rx="13" ry="5.5" transform="rotate(-22 80 127)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="82"  cy="142" rx="13" ry="5.5" transform="rotate(-8 82 142)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="86"  cy="157" rx="13" ry="5.5" transform="rotate(8 86 157)"    fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="93"  cy="171" rx="13" ry="5.5" transform="rotate(22 93 171)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="104" cy="184" rx="13" ry="5.5" transform="rotate(37 104 184)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="116" cy="196" rx="13" ry="5.5" transform="rotate(52 116 196)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+
+  <!-- Leaf center spine lines (left side) -->
+  <line x1="89"  y1="81"  x2="91"  y2="85"  stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="84"  y1="95"  x2="86"  y2="99"  stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="80"  y1="110" x2="82"  y2="114" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="79"  y1="125" x2="81"  y2="129" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="81"  y1="140" x2="83"  y2="144" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="85"  y1="155" x2="87"  y2="159" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="92"  y1="169" x2="94"  y2="173" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="103" y1="182" x2="105" y2="186" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+
+  <!-- ══════════════════════════════════
+       LAUREL WREATH — Right stem
+  ══════════════════════════════════ -->
+  <path d="M 200,76 Q 216,118 210,170 Q 200,200 170,220"
+        stroke="#8B6210"     stroke-width="4"   fill="none" stroke-linecap="round"/>
+  <path d="M 200,76 Q 216,118 210,170 Q 200,200 170,220"
+        stroke="url(#gMain)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Right leaves (mirrored, pointing outward-right) -->
+  <ellipse cx="210" cy="83"  rx="13" ry="5.5" transform="rotate(55 210 83)"    fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="215" cy="97"  rx="13" ry="5.5" transform="rotate(46 215 97)"    fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="219" cy="112" rx="13" ry="5.5" transform="rotate(35 219 112)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="220" cy="127" rx="13" ry="5.5" transform="rotate(22 220 127)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="218" cy="142" rx="13" ry="5.5" transform="rotate(8 218 142)"    fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="214" cy="157" rx="13" ry="5.5" transform="rotate(-8 214 157)"   fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="207" cy="171" rx="13" ry="5.5" transform="rotate(-22 207 171)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="196" cy="184" rx="13" ry="5.5" transform="rotate(-37 196 184)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+  <ellipse cx="184" cy="196" rx="13" ry="5.5" transform="rotate(-52 184 196)"  fill="url(#gLeaf)" stroke="#8B6210" stroke-width="0.5"/>
+
+  <!-- Spine sheen lines (right side) -->
+  <line x1="211" y1="81"  x2="209" y2="85"  stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="216" y1="95"  x2="214" y2="99"  stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="220" y1="110" x2="218" y2="114" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="221" y1="125" x2="219" y2="129" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="219" y1="140" x2="217" y2="144" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="215" y1="155" x2="213" y2="159" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="208" y1="169" x2="206" y2="173" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+  <line x1="197" y1="182" x2="195" y2="186" stroke="#F5E070" stroke-width="0.7" opacity="0.5"/>
+
+  <!-- ══════════════════════════════════
+       BOTTOM WREATH TIE / BERRY
+  ══════════════════════════════════ -->
+  <circle cx="150" cy="221" r="8.5" fill="#8B6210"/>
+  <circle cx="150" cy="221" r="8.5" fill="url(#gMain)" opacity="0.9"/>
+  <circle cx="150" cy="221" r="4"   fill="#8B6210"/>
+  <circle cx="148" cy="219" r="1.5" fill="#F5E070" opacity="0.5"/>
+
+  <!-- ══════════════════════════════════
+       CR  MONOGRAM
+  ══════════════════════════════════ -->
+  <!-- Shadow layer -->
+  <text x="152" y="157"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="66"
+        font-weight="bold"
+        fill="#5A3D08"
+        opacity="0.6">CR</text>
+  <!-- Main text -->
+  <text x="150" y="155"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="66"
+        font-weight="bold"
+        fill="url(#gText)"
+        stroke="#8B6210"
+        stroke-width="0.8">CR</text>
+  <!-- Top highlight sheen -->
+  <text x="150" y="155"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="66"
+        font-weight="bold"
+        fill="none"
+        stroke="#F5E070"
+        stroke-width="0.5"
+        opacity="0.3">CR</text>
+</svg>

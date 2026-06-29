@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join Christopher R. Bridge & Co. Law Firm — explore career opportunities for exceptional legal professionals.">
+  <title>Careers | Christopher R. Bridge & Co. Law Firm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+      gap: 24px;
+      margin-top: 50px;
+    }
+    .culture-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .culture-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
+    .culture-icon {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--gold-light);
+      margin: 0 auto 20px;
+    }
+    .culture-card h3 { font-family: var(--font-serif); color: var(--navy); margin-bottom: 12px; font-size: 1.1rem; }
+    .culture-card p { font-size: 0.87rem; color: var(--text-light); line-height: 1.7; }
+
+    .apply-modal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--gold);
+      color: var(--navy-dark);
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      font-family: var(--font-sans);
+    }
+    .apply-modal-btn:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 50px;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 32px; left: 12.5%; right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--navy));
+    }
+    .process-step { text-align: center; padding: 0 16px; }
+    .step-num {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 2;
+      box-shadow: var(--shadow-sm);
+    }
+    .process-step h4 { font-family: var(--font-serif); color: var(--navy); margin-bottom: 8px; font-size: 1rem; }
+    .process-step p { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 480px) {
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img">
+        <div class="nav-logo-divider"></div>
+        <div class="nav-logo-text">
+          <span class="logo-primary">Christopher R. Bridge &amp; Co.</span>
+          <span class="logo-secondary">Barrister, Solicitor &amp; Legal Consultant</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="practice-areas.html">Practice Areas</a>
+        <a href="attorneys.html">Our Team</a>
+        <a href="news.html">News &amp; Insights</a>
+        <a href="careers.html" class="active">Careers</a>
+        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+        <span>Careers</span>
+      </div>
+      <h1>Build Your Career With Us</h1>
+      <p>Join a firm where exceptional talent is recognized, careers are built, and the law is practiced at the highest level. We invest in our people as much as we invest in our clients.</p>
+    </div>
+  </section>
+
+  <!-- WHY JOIN -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+        <div class="reveal-left">
+          <div class="section-label">Why Join Us</div>
+          <h2 class="section-title">Where Exceptional Careers Are Built</h2>
+          <div class="gold-divider"></div>
+          <p style="color:var(--text-light);line-height:1.85;margin-bottom:18px;">
+            At Christopher R. Bridge &amp; Co., we believe that our greatest asset is our people. We attract and retain the finest legal minds by fostering an environment of intellectual rigor, professional growth, and genuine collaboration.
+          </p>
+          <p style="color:var(--text-light);line-height:1.85;margin-bottom:28px;">
+            Our attorneys work on high-stakes, sophisticated matters that challenge and develop their skills. You'll work alongside recognized leaders in their fields, on cases and transactions that genuinely matter.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--off-white);border-radius:var(--radius);border-left:3px solid var(--gold);">
+              <i class="fa-solid fa-check-circle" style="color:var(--gold);font-size:1.1rem;flex-shrink:0;"></i>
+              <span style="font-size:0.88rem;color:var(--text);font-weight:500;">Competitive compensation and performance bonuses</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--off-white);border-radius:var(--radius);border-left:3px solid var(--gold);">
+              <i class="fa-solid fa-check-circle" style="color:var(--gold);font-size:1.1rem;flex-shrink:0;"></i>
+              <span style="font-size:0.88rem;color:var(--text);font-weight:500;">Structured mentorship from senior partners</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--off-white);border-radius:var(--radius);border-left:3px solid var(--gold);">
+              <i class="fa-solid fa-check-circle" style="color:var(--gold);font-size:1.1rem;flex-shrink:0;"></i>
+              <span style="font-size:0.88rem;color:var(--text);font-weight:500;">CLE sponsorship and professional development fund</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--off-white);border-radius:var(--radius);border-left:3px solid var(--gold);">
+              <i class="fa-solid fa-check-circle" style="color:var(--gold);font-size:1.1rem;flex-shrink:0;"></i>
+              <span style="font-size:0.88rem;color:var(--text);font-weight:500;">Comprehensive health, dental, and wellness benefits</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--off-white);border-radius:var(--radius);border-left:3px solid var(--gold);">
+              <i class="fa-solid fa-check-circle" style="color:var(--gold);font-size:1.1rem;flex-shrink:0;"></i>
+              <span style="font-size:0.88rem;color:var(--text);font-weight:500;">Clear partnership track with transparent criteria</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-right">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=85" alt="Team at Christopher R. Bridge & Co." style="border-radius:20px;box-shadow:var(--shadow-lg);width:100%;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Our Culture</div>
+        <h2 class="section-title">What Makes Us Different</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="culture-grid">
+        <div class="culture-card reveal">
+          <div class="culture-icon"><i class="fa-solid fa-users"></i></div>
+          <h3>Collaborative Environment</h3>
+          <p>We work as one team across practice areas. Collaboration is not just encouraged — it's how we deliver the best outcomes for our clients.</p>
+        </div>
+        <div class="culture-card reveal">
+          <div class="culture-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Career Growth</h3>
+          <p>Structured development programs, mentorship from senior partners, and clear pathways to partnership for high-performing associates.</p>
+        </div>
+        <div class="culture-card reveal">
+          <div class="culture-icon"><i class="fa-solid fa-balance-scale"></i></div>
+          <h3>Pro Bono Commitment</h3>
+          <p>We dedicate 10,000+ hours annually to pro bono work. Our attorneys are encouraged to give back to the communities we serve.</p>
+        </div>
+        <div class="culture-card reveal">
+          <div class="culture-icon"><i class="fa-solid fa-heart"></i></div>
+          <h3>Wellbeing First</h3>
+          <p>We recognize that peak performance requires balance. Our wellness programs, mental health resources, and flexible arrangements reflect our genuine care for our team.</p>
+        </div>
+        <div class="culture-card reveal">
+          <div class="culture-icon"><i class="fa-solid fa-globe"></i></div>
+          <h3>Diversity &amp; Inclusion</h3>
+          <p>We believe that diverse perspectives make better lawyers and better outcomes. We are committed to building an inclusive firm that reflects the world we serve.</p>
+        </div>
+        <div class="culture-card reveal">
+          <div class="culture-icon"><i class="fa-solid fa-star"></i></div>
+          <h3>Excellence Recognized</h3>
+          <p>We celebrate achievement. Top performers are recognized, rewarded, and fast-tracked. Excellence at every level is noticed and valued.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN POSITIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:50px;">
+        <div class="section-label">Open Positions</div>
+        <h2 class="section-title">Current Opportunities</h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle">We are always interested in connecting with exceptional legal talent. If you don't see a role that matches your profile, we encourage you to reach out.</p>
+      </div>
+
+      <div id="careersContainer">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION PROCESS -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">How to Apply</div>
+        <h2 class="section-title">Our Application Process</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="process-steps reveal">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <h4>Submit Your Application</h4>
+          <p>Contact us with your CV, cover letter, and relevant writing samples or work product.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <h4>Initial Screening</h4>
+          <p>Our recruiting team reviews applications and conducts an initial phone or video conversation.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <h4>Interviews</h4>
+          <p>Qualified candidates meet with partners and senior associates across relevant practice areas.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <h4>Offer &amp; Onboarding</h4>
+          <p>Successful candidates receive an offer and begin our structured onboarding and orientation program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY CTA -->
+  <section class="stats-section" style="padding:80px 0;">
+    <div class="container" style="text-align:center;position:relative;z-index:1;">
+      <h2 style="font-family:var(--font-serif);color:white;font-size:2.2rem;margin-bottom:20px;">
+        Ready to Take the Next Step?
+      </h2>
+      <p style="color:rgba(255,255,255,0.65);max-width:480px;margin:0 auto 36px;line-height:1.75;">
+        Send your CV and a brief introduction to our recruiting team. We look forward to learning about you.
+      </p>
+      <a href="index.html#contact" class="btn btn--gold" style="font-size:1rem;padding:16px 36px;">
+        <i class="fa-solid fa-paper-plane"></i> Get Our Contact Details
+      </a>
+    </div>
+  </section>
+
+  <!-- APPLICATION MODAL -->
+  <div class="modal-overlay" id="applyModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Apply for Position</h3>
+        <button class="modal-close" onclick="document.getElementById('applyModal').classList.remove('open')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="background:var(--off-white);border-radius:var(--radius-lg);padding:28px;border-left:4px solid var(--gold);margin-bottom:20px;">
+          <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:12px;">How to Apply</h4>
+          <p style="font-size:0.9rem;color:var(--text-light);line-height:1.7;margin-bottom:16px;">
+            To apply for a position at Christopher R. Bridge &amp; Co., please contact our recruiting team directly with the following materials:
+          </p>
+          <ul style="font-size:0.88rem;color:var(--text-light);line-height:1.8;padding-left:18px;">
+            <li>Current curriculum vitae / résumé</li>
+            <li>Cover letter addressing the position of interest</li>
+            <li>Law school transcript (for associates and clerks)</li>
+            <li>Two or three writing samples</li>
+            <li>List of professional references</li>
+          </ul>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="contact-detail-text">
+            <div class="lbl">Recruiting Email</div>
+            <div class="val">careers@bridgelegal.com</div>
+          </div>
+        </div>
+        <div class="contact-detail" style="margin-top:12px;">
+          <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="contact-detail-text">
+            <div class="lbl">Recruiting Line</div>
+            <div class="val">(555) 123-4567 ext. 201</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn--navy" onclick="document.getElementById('applyModal').classList.remove('open')" style="font-size:0.85rem;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Christopher R. Bridge &amp; Co.</div>
+          <div class="footer-logo-sub">Barrister, Solicitor &amp; Legal Consultant</div>
+          <p class="footer-desc">Building exceptional legal careers since 1991.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Practice Areas</a></li>
+            <li><a href="attorneys.html"><i class="fa-solid fa-chevron-right"></i> Our Team</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Practice Areas</h4>
+          <ul>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Corporate Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Civil Litigation</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Real Estate Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Immigration Law</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>123 Legal Plaza, Suite 500<br>New York, NY 10001</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>(555) 123-4567</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@bridgelegal.com</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Christopher R. Bridge &amp; Co. Law Firm. All rights reserved.</p>
+        <p class="footer-disclaimer">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" style="position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--navy-dark);border:none;cursor:pointer;font-size:1rem;box-shadow:0 4px 20px rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;transform:translateY(80px);opacity:0;transition:all 0.4s ease;z-index:500;">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+  <style>#scrollTop.visible{transform:translateY(0);opacity:1;}</style>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    BridgeAPI.getAllData().catch(() => getSiteData()).then(data => {
+      const container = document.getElementById('careersContainer');
+      container.innerHTML = data.careers.map(c => `
+        <div class="career-card reveal">
+          <div class="career-info">
+            <h3>${c.title}</h3>
+            <div class="career-meta">
+              <span class="career-tag"><i class="fa-solid fa-clock"></i>${c.type}</span>
+              <span class="career-tag"><i class="fa-solid fa-location-dot"></i>${c.location}</span>
+            </div>
+            <p>${c.description}</p>
+          </div>
+          <div class="career-apply">
+            <button class="apply-modal-btn" onclick="document.getElementById('applyModal').classList.add('open')">
+              <i class="fa-solid fa-paper-plane"></i> Apply Now
+            </button>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

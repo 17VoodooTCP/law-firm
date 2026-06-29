@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the distinguished attorneys of Christopher R. Bridge & Co. Law Firm — experienced legal professionals dedicated to your success.">
+  <title>Our Attorneys | Christopher R. Bridge & Co. Law Firm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .attorney-full-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      transition: var(--transition);
+      margin-bottom: 28px;
+    }
+    .attorney-full-card:hover { box-shadow: var(--shadow-lg); border-color: var(--gold-light); }
+    .attorney-full-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .attorney-full-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s ease;
+      min-height: 320px;
+    }
+    .attorney-full-card:hover .attorney-full-photo img { transform: scale(1.04); }
+    .attorney-full-body {
+      padding: 40px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .attorney-full-body .atty-title-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      background: rgba(201,168,76,0.1);
+      padding: 5px 14px;
+      border-radius: 30px;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+    .attorney-full-body h2 {
+      font-family: var(--font-serif);
+      color: var(--navy);
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+    .attorney-full-body .atty-area {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .attorney-full-body .atty-area i { color: var(--gold); }
+    .attorney-full-body p {
+      color: var(--text-light);
+      line-height: 1.8;
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+    }
+    .attorney-credentials { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cred-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 30px;
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      color: var(--navy);
+    }
+    .cred-badge i { color: var(--gold); font-size: 0.7rem; }
+
+    @media (max-width: 768px) {
+      .attorney-full-card { grid-template-columns: 1fr; }
+      .attorney-full-photo img { min-height: 280px; }
+      .attorney-full-body { padding: 28px 24px; }
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+    .filter-tab {
+      padding: 9px 20px;
+      border-radius: 30px;
+      border: 1.5px solid var(--gray-200);
+      background: white;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-tab:hover { border-color: var(--navy); color: var(--navy); }
+    .filter-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
+  </style>
+</head>
+<body class="page-transition">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img">
+        <div class="nav-logo-divider"></div>
+        <div class="nav-logo-text">
+          <span class="logo-primary">Christopher R. Bridge &amp; Co.</span>
+          <span class="logo-secondary">Barrister, Solicitor &amp; Legal Consultant</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="practice-areas.html">Practice Areas</a>
+        <a href="attorneys.html" class="active">Our Team</a>
+        <a href="news.html">News &amp; Insights</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+        <span>Our Team</span>
+      </div>
+      <h1>Our Distinguished Team</h1>
+      <p>Meet the experienced attorneys who make up the strength of Christopher R. Bridge &amp; Co. — each bringing exceptional expertise, passion, and dedication to every client matter.</p>
+    </div>
+  </section>
+
+  <!-- ATTORNEYS -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:50px;">
+        <div class="section-label">The Professionals</div>
+        <h2 class="section-title">Our Attorney Team</h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle">Recognized leaders. Relentless advocates. Trusted counselors.</p>
+      </div>
+
+      <div id="attorneyFullList">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section class="section">
+    <div class="container">
+      <div style="background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:24px;padding:64px;text-align:center;position:relative;overflow:hidden;" class="reveal">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,0.12) 0%,transparent 60%);pointer-events:none;"></div>
+        <div class="section-label" style="justify-content:center;color:var(--gold-light);">Join Our Team</div>
+        <h2 style="font-family:var(--font-serif);color:white;font-size:2rem;margin:16px 0 20px;">Are You an Exceptional Attorney?</h2>
+        <p style="color:rgba(255,255,255,0.65);max-width:500px;margin:0 auto 36px;line-height:1.75;font-size:0.95rem;">
+          We are always seeking talented legal professionals who share our commitment to excellence, integrity, and client-centered representation.
+        </p>
+        <a href="careers.html" class="btn btn--gold" style="font-size:1rem;padding:16px 36px;">
+          <i class="fa-solid fa-briefcase"></i>
+          View Career Opportunities
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+            <img src="images/logo.svg" alt="CR Bridge Logo" style="height:52px;width:52px;object-fit:contain;">
+            <div>
+              <div class="footer-logo">Christopher R. Bridge &amp; Co.</div>
+              <div class="footer-logo-sub">Barrister, Solicitor &amp; Legal Consultant</div>
+            </div>
+          </div>
+          <p class="footer-desc">60+ legal professionals committed to your success since 1991.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Practice Areas</a></li>
+            <li><a href="attorneys.html"><i class="fa-solid fa-chevron-right"></i> Our Team</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News</a></li>
+            <li><a href="careers.html"><i class="fa-solid fa-chevron-right"></i> Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Practice Areas</h4>
+          <ul>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Corporate Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Civil Litigation</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Real Estate Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Family Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Immigration Law</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>123 Legal Plaza, Suite 500<br>New York, NY 10001</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>(555) 123-4567</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@bridgelegal.com</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Christopher R. Bridge &amp; Co. Law Firm. All rights reserved.</p>
+        <p class="footer-disclaimer">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" style="position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--navy-dark);border:none;cursor:pointer;font-size:1rem;box-shadow:0 4px 20px rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;transform:translateY(80px);opacity:0;transition:all 0.4s ease;z-index:500;">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+  <style>#scrollTop.visible{transform:translateY(0);opacity:1;}</style>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    BridgeAPI.getAllData().catch(() => getSiteData()).then(data => {
+      const credentials = [
+        ['J.D., Harvard Law School','30+ Years Experience','Chambers USA Band 1','Super Lawyer 2015–2026'],
+        ['J.D., Columbia Law School','20+ Years Experience','Super Lawyer 2018–2026','AV Preeminent Rated'],
+        ['J.D., NYU School of Law','18+ Years Experience','Real Estate Law Expert','$2B+ Transactions Closed'],
+        ['Ph.D. International Law','J.D., Georgetown University','Fluent in 6 Languages','Global Immigration Expert'],
+        ['J.D., Fordham Law School','Former Federal Prosecutor','Criminal Defense Specialist','AV Preeminent Rated'],
+        ['J.D., Cornell Law School','Family Law Specialist','Estate Planning Expert','Rising Star 2022–2026']
+      ];
+
+      const list = document.getElementById('attorneyFullList');
+      list.innerHTML = data.attorneys.map((a, i) => `
+        <div class="attorney-full-card reveal">
+          <div class="attorney-full-photo">
+            <img src="${a.image}" alt="${a.name}" loading="lazy">
+          </div>
+          <div class="attorney-full-body">
+            <span class="atty-title-tag"><i class="fa-solid fa-gavel"></i> ${a.title}</span>
+            <h2>${a.name}</h2>
+            <div class="atty-area"><i class="fa-solid fa-circle-dot"></i> ${a.area}</div>
+            <p>${a.bio}</p>
+            <div class="attorney-credentials">
+              ${(credentials[i] || credentials[0]).map(c => `
+                <span class="cred-badge"><i class="fa-solid fa-check-circle"></i>${c}</span>
+              `).join('')}
+            </div>
+            <div style="margin-top:24px;">
+              <a href="index.html#contact" class="btn btn--gold" style="font-size:0.84rem;padding:11px 22px;">
+                <i class="fa-solid fa-envelope"></i> Contact ${a.name.split(' ')[0]}
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

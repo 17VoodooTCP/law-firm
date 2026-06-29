@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Christopher R. Bridge & Co. Law Firm — our story, values, and commitment to legal excellence since 1991.">
+  <title>About Us | Christopher R. Bridge & Co. Law Firm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .timeline { position: relative; padding-left: 36px; margin-top: 50px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--navy));
+    }
+    .timeline-item { position: relative; margin-bottom: 42px; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -42px; top: 6px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px var(--gold);
+    }
+    .timeline-year {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .timeline-item h3 {
+      font-family: var(--font-serif);
+      color: var(--navy);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .timeline-item p { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; }
+
+    .recognition-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 24px; margin-top: 40px; }
+    .recognition-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .recognition-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
+    .recognition-card .icon { font-size: 2rem; color: var(--gold); margin-bottom: 14px; }
+    .recognition-card h4 { font-family: var(--font-serif); color: var(--navy); font-size: 1rem; margin-bottom: 8px; }
+    .recognition-card p { font-size: 0.8rem; color: var(--text-light); line-height: 1.6; }
+  </style>
+</head>
+<body class="page-transition">
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img">
+        <div class="nav-logo-divider"></div>
+        <div class="nav-logo-text">
+          <span class="logo-primary">Christopher R. Bridge &amp; Co.</span>
+          <span class="logo-secondary">Barrister, Solicitor &amp; Legal Consultant</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="practice-areas.html">Practice Areas</a>
+        <a href="attorneys.html">Our Team</a>
+        <a href="news.html">News &amp; Insights</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+        <span>About</span>
+      </div>
+      <h1>About Our Firm</h1>
+      <p>Three decades of legal excellence, built on integrity, dedication, and an unwavering commitment to our clients.</p>
+    </div>
+  </section>
+
+  <!-- OUR STORY -->
+  <section class="section">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-content reveal-left">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">A Legacy of Legal Excellence</h2>
+          <div class="gold-divider"></div>
+          <p style="color:var(--text-light); line-height:1.85; margin-bottom:18px;">
+            Founded in 1991 by Christopher R. Bridge, our firm began with a simple yet powerful conviction: that every client deserves world-class legal representation delivered with personal care. What started as a boutique practice has grown — through decades of dedication, landmark victories, and an expanding team of exceptional attorneys — into one of the nation's most respected law firms.
+          </p>
+          <p style="color:var(--text-light); line-height:1.85; margin-bottom:18px;">
+            Today, Christopher R. Bridge &amp; Co. serves individuals, corporations, and institutions across the full spectrum of legal needs. Our attorneys have argued before state supreme courts and federal circuit courts, closed multi-billion dollar transactions, and guided clients through some of the most complex legal challenges of our era.
+          </p>
+          <p style="color:var(--text-light); line-height:1.85;">
+            Yet through all our growth, one thing has never changed: our belief that exceptional legal counsel begins with listening — understanding each client's unique situation, goals, and concerns — and then delivering the strategic, relentless representation they deserve.
+          </p>
+        </div>
+        <div class="about-image-wrap reveal-right">
+          <div class="about-image-main">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=85" alt="Attorney Christopher R. Bridge">
+          </div>
+          <div class="about-award">
+            <div class="award-num">#1</div>
+            <div class="award-label">Ranked<br>Practice</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION & VALUES -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Our Foundation</div>
+        <h2 class="section-title">Mission, Vision &amp; Values</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:28px; margin-top:50px;">
+        <div class="why-card reveal">
+          <div class="why-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>To deliver exceptional legal representation and strategic counsel that protects our clients' interests, upholds justice, and creates lasting value — with integrity at every turn.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon"><i class="fa-solid fa-eye"></i></div>
+          <h3>Our Vision</h3>
+          <p>To be the most trusted and respected law firm in the nation — recognized not only for our legal expertise and results, but for the profound difference we make in the lives of our clients.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon"><i class="fa-solid fa-gem"></i></div>
+          <h3>Our Values</h3>
+          <p>Integrity. Excellence. Client focus. Strategic innovation. Collaboration. These aren't just words — they are the principles that guide every decision, every case, and every client relationship we build.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+        <div class="reveal-left">
+          <div class="section-label">Our Journey</div>
+          <h2 class="section-title">35 Years of Building Excellence</h2>
+          <div class="gold-divider"></div>
+          <p style="color:var(--text-light); line-height:1.85;">
+            From a single office to a distinguished multi-practice firm, our journey reflects a steadfast commitment to growth, excellence, and the clients who have placed their trust in us.
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">1991</div>
+              <h3>The Founding</h3>
+              <p>Christopher R. Bridge establishes the firm in New York with a founding vision of client-centered excellence and strategic legal innovation.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1998</div>
+              <h3>Expansion &amp; Recognition</h3>
+              <p>The firm expands to include corporate and real estate practices, earning its first Chambers USA ranking and welcoming five new partners.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2005</div>
+              <h3>National Reach</h3>
+              <p>A landmark federal jury trial victory establishes the firm's national reputation in complex civil litigation, attracting major corporate clients.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2012</div>
+              <h3>International Practice</h3>
+              <p>Dr. Amara N. Osei joins as Partner, launching our international and immigration law practice serving global clients and multinational corporations.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2020</div>
+              <h3>Top 50 Designation</h3>
+              <p>Named among the nation's Top 50 Law Firms by both Legal 500 and Chambers USA — a recognition maintained for five consecutive years.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Today</div>
+              <h3>35 Years &amp; Growing</h3>
+              <p>Over 60 legal professionals, 12,000+ satisfied clients, and a legacy of landmark victories — with the best still ahead.</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-right">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=650&q=85" alt="Firm history" style="border-radius:20px; box-shadow:var(--shadow-lg); width:100%;">
+          <div style="margin-top:32px; background:linear-gradient(135deg,var(--navy),var(--navy-light)); border-radius:var(--radius-lg); padding:36px; color:white;">
+            <div class="section-label" style="color:var(--gold-light);">Our Promise</div>
+            <h3 style="font-family:var(--font-serif); font-size:1.3rem; margin:12px 0; color:white;">"Every client deserves our absolute best — and that is precisely what we deliver."</h3>
+            <p style="color:rgba(255,255,255,0.7); font-size:0.88rem; line-height:1.75;">— Christopher R. Bridge, Founding Partner</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOGNITION -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Awards &amp; Honors</div>
+        <h2 class="section-title">Recognition &amp; Rankings</h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle">Our work speaks for itself — and the legal industry has taken notice.</p>
+      </div>
+      <div class="recognition-grid">
+        <div class="recognition-card reveal">
+          <div class="icon"><i class="fa-solid fa-award"></i></div>
+          <h4>Chambers USA</h4>
+          <p>Ranked in multiple practice areas for 12 consecutive years. Band 1 designation in Corporate Law.</p>
+        </div>
+        <div class="recognition-card reveal">
+          <div class="icon"><i class="fa-solid fa-star"></i></div>
+          <h4>Legal 500</h4>
+          <p>Listed in the Legal 500 USA for Corporate/M&amp;A, Litigation, and Real Estate practice groups.</p>
+        </div>
+        <div class="recognition-card reveal">
+          <div class="icon"><i class="fa-solid fa-medal"></i></div>
+          <h4>Super Lawyers</h4>
+          <p>Multiple attorneys recognized as Super Lawyers and Rising Stars across practice areas.</p>
+        </div>
+        <div class="recognition-card reveal">
+          <div class="icon"><i class="fa-solid fa-trophy"></i></div>
+          <h4>Best Law Firms</h4>
+          <p>US News &amp; World Report "Best Law Firms" — Tier 1 designation in New York metropolitan area.</p>
+        </div>
+        <div class="recognition-card reveal">
+          <div class="icon"><i class="fa-solid fa-certificate"></i></div>
+          <h4>AV Preeminent</h4>
+          <p>Martindale-Hubbell AV Preeminent rating — the highest peer review recognition in the legal profession.</p>
+        </div>
+        <div class="recognition-card reveal">
+          <div class="icon"><i class="fa-solid fa-handshake-angle"></i></div>
+          <h4>Pro Bono Excellence</h4>
+          <p>New York State Bar Association Pro Bono Publico Award for outstanding community legal service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+            <img src="images/logo.svg" alt="CR Bridge Logo" style="height:52px;width:52px;object-fit:contain;">
+            <div>
+              <div class="footer-logo">Christopher R. Bridge &amp; Co.</div>
+              <div class="footer-logo-sub">Barrister, Solicitor &amp; Legal Consultant</div>
+            </div>
+          </div>
+          <p class="footer-desc">Providing exceptional legal representation since 1991. Built on integrity, excellence, and results.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Practice Areas</a></li>
+            <li><a href="attorneys.html"><i class="fa-solid fa-chevron-right"></i> Our Team</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News</a></li>
+            <li><a href="careers.html"><i class="fa-solid fa-chevron-right"></i> Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Practice Areas</h4>
+          <ul>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Corporate Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Civil Litigation</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Real Estate Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Family Law</a></li>
+            <li><a href="practice-areas.html"><i class="fa-solid fa-chevron-right"></i> Employment Law</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>123 Legal Plaza, Suite 500<br>New York, NY 10001</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>(555) 123-4567</span></div>
+          <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@bridgelegal.com</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Christopher R. Bridge &amp; Co. Law Firm. All rights reserved.</p>
+        <p class="footer-disclaimer">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" style="position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--navy-dark);border:none;cursor:pointer;font-size:1rem;box-shadow:0 4px 20px rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;transform:translateY(80px);opacity:0;transition:all 0.4s ease;z-index:500;">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+  <style>#scrollTop.visible{transform:translateY(0);opacity:1;}</style>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
