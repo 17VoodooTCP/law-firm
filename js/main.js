@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
           revealObs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
     revealEls.forEach(el => revealObs.observe(el));
   } else {
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('visible')); return; }
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     els.forEach(el => obs.observe(el));
   }
 

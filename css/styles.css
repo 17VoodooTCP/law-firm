@@ -163,12 +163,17 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
 }
 
 /* Scroll-reveal classes */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
+@media (max-width: 768px) {
+  .reveal { transform: translateY(16px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .reveal-left { transform: translateX(-20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .reveal-right { transform: translateX(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+}
 
 /* ============================================================
    NAVIGATION
@@ -661,9 +666,13 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   gap: 24px;
   padding: 20px 60px 50px;
   animation: scrollTrack 40s linear infinite;
+  width: -webkit-max-content;
   width: max-content;
+  -webkit-animation: scrollTrack 40s linear infinite;
 }
-.lawyer-track:hover { animation-play-state: paused; }
+@media (hover: hover) {
+  .lawyer-track:hover { animation-play-state: paused; }
+}
 
 @keyframes scrollTrack {
   0% { transform: translateX(0); }
