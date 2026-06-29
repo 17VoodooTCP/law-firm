@@ -59,7 +59,7 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="dot"></span>
-          Established 1991 &nbsp;·&nbsp; New York, USA
+          Established 1991 &nbsp;·&nbsp; London, UK &nbsp;·&nbsp; New York, USA
         </div>
 
         <h1 class="hero-title">
@@ -441,6 +441,7 @@
                 <div class="lbl">UK Office</div>
                 <div class="val" id="contactPhone">+44 (7882) 795204</div>
               </div>
+              <button class="copy-btn" onclick="copyVal('contactPhone',this)" title="Copy"><i class="fa-regular fa-copy"></i> Copy</button>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
@@ -448,6 +449,7 @@
                 <div class="lbl">US Office</div>
                 <div class="val" id="contactPhone2">+1 (402) 598-8172</div>
               </div>
+              <button class="copy-btn" onclick="copyVal('contactPhone2',this)" title="Copy"><i class="fa-regular fa-copy"></i> Copy</button>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
@@ -455,6 +457,7 @@
                 <div class="lbl">Email</div>
                 <div class="val" id="contactEmail">contact@christopherrbridgeco.com</div>
               </div>
+              <button class="copy-btn" onclick="copyVal('contactEmail',this)" title="Copy"><i class="fa-regular fa-copy"></i> Copy</button>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -462,6 +465,7 @@
                 <div class="lbl">London</div>
                 <div class="val" id="contactAddress">One Canada Square, Canary Wharf, London E14 5AB</div>
               </div>
+              <button class="copy-btn" onclick="copyVal('contactAddress',this)" title="Copy"><i class="fa-regular fa-copy"></i> Copy</button>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -469,6 +473,7 @@
                 <div class="lbl">New York</div>
                 <div class="val" id="contactAddress2">1250 Broadway, Suite 3600, NY 10001</div>
               </div>
+              <button class="copy-btn" onclick="copyVal('contactAddress2',this)" title="Copy"><i class="fa-regular fa-copy"></i> Copy</button>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-clock"></i></div>
@@ -640,6 +645,19 @@
       document.getElementById('contactAddress2').textContent = firm.address2 || '1250 Broadway, Suite 3600, NY 10001';
       document.getElementById('contactHours').textContent    = firm.hours;
     });
+  </script>
+  <script>
+  function copyVal(id, btn) {
+    const text = document.getElementById(id).textContent.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
   </script>
 </body>
 </html>
