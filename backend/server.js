@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 5000;
 // CORS — allow Vercel frontend + localhost dev
 const allowedOrigins = [
   process.env.FRONTEND_URL,
+  'https://www.christopherrbridgeco.com',
+  'https://christopherrbridgeco.com',
   'http://localhost:3000',
   'http://127.0.0.1:3000'
 ].filter(Boolean);
