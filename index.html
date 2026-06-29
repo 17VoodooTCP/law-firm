@@ -438,29 +438,43 @@
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
               <div class="contact-detail-text">
-                <div class="lbl">Phone</div>
-                <div class="val" id="contactPhone">(555) 123-4567</div>
+                <div class="lbl">UK Office</div>
+                <div class="val" id="contactPhone">+44 (7882) 795204</div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-detail-text">
+                <div class="lbl">US Office</div>
+                <div class="val" id="contactPhone2">+1 (402) 598-8172</div>
               </div>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
               <div class="contact-detail-text">
                 <div class="lbl">Email</div>
-                <div class="val" id="contactEmail">contact@bridgelegal.com</div>
+                <div class="val" id="contactEmail">contact@christopherrbridgeco.com</div>
               </div>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
               <div class="contact-detail-text">
-                <div class="lbl">Office</div>
-                <div class="val" id="contactAddress">123 Legal Plaza, Suite 500, New York, NY</div>
+                <div class="lbl">London</div>
+                <div class="val" id="contactAddress">One Canada Square, Canary Wharf, London E14 5AB</div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-detail-text">
+                <div class="lbl">New York</div>
+                <div class="val" id="contactAddress2">1250 Broadway, Suite 3600, NY 10001</div>
               </div>
             </div>
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class="fa-solid fa-clock"></i></div>
               <div class="contact-detail-text">
                 <div class="lbl">Office Hours</div>
-                <div class="val" id="contactHours">Mon–Fri &nbsp; 8:00 AM – 6:00 PM</div>
+                <div class="val" id="contactHours">Mon–Fri &nbsp; 8:00 AM – 6:00 PM (GMT / EST)</div>
               </div>
             </div>
           </div>
@@ -528,19 +542,23 @@
           <h4>Contact Information</h4>
           <div class="footer-contact-item">
             <i class="fa-solid fa-location-dot"></i>
-            <span>123 Legal Plaza, Suite 500<br>New York, NY 10001</span>
+            <span>One Canada Square, Canary Wharf<br>London E14 5AB, UK</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>1250 Broadway, Suite 3600<br>New York, NY 10001, USA</span>
           </div>
           <div class="footer-contact-item">
             <i class="fa-solid fa-phone"></i>
-            <span>(555) 123-4567</span>
+            <span>+44 (7882) 795204 &nbsp;|&nbsp; +1 (402) 598-8172</span>
           </div>
           <div class="footer-contact-item">
             <i class="fa-solid fa-envelope"></i>
-            <span>contact@bridgelegal.com</span>
+            <span>contact@christopherrbridgeco.com</span>
           </div>
           <div class="footer-contact-item">
             <i class="fa-solid fa-clock"></i>
-            <span>Monday–Friday<br>8:00 AM – 6:00 PM</span>
+            <span>Monday–Friday<br>8:00 AM – 6:00 PM (GMT / EST)</span>
           </div>
         </div>
       </div>
@@ -615,10 +633,12 @@
       );
 
       // Contact info
-      document.getElementById('contactPhone').textContent   = firm.phone;
-      document.getElementById('contactEmail').textContent   = firm.email;
-      document.getElementById('contactAddress').textContent = firm.address;
-      document.getElementById('contactHours').textContent   = firm.hours;
+      document.getElementById('contactPhone').textContent    = firm.phone2 || '+44 (7882) 795204';
+      document.getElementById('contactPhone2').textContent   = firm.phone  || '+1 (402) 598-8172';
+      document.getElementById('contactEmail').textContent    = firm.email;
+      document.getElementById('contactAddress').textContent  = firm.address;
+      document.getElementById('contactAddress2').textContent = firm.address2 || '1250 Broadway, Suite 3600, NY 10001';
+      document.getElementById('contactHours').textContent    = firm.hours;
     });
   </script>
 </body>
