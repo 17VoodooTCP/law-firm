@@ -18,11 +18,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (navToggle && navLinks) {
+    let lockedScrollY = 0;
+
+    function lockScroll() {
+      lockedScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    }
+    function unlockScroll() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, lockedScrollY);
+    }
     function closeNav() {
       navLinks.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-      document.body.style.overflow = '';
+      unlockScroll();
     }
     navToggle.addEventListener('click', () => {
       const open = navLinks.classList.toggle('open');
@@ -30,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       navToggle.querySelectorAll('span')[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
       navToggle.querySelectorAll('span')[1].style.opacity  = open ? '0' : '1';
       navToggle.querySelectorAll('span')[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
-      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) lockScroll(); else unlockScroll();
     });
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
