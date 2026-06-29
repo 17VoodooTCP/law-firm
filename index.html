@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1b2b5e">
   <meta name="description" content="Christopher R. Bridge & Co. Law Firm — Trusted Legal Excellence. Providing strategic legal solutions with integrity, dedication, and experience.">
   <meta name="keywords" content="law firm, attorney, lawyer, corporate law, litigation, real estate law, New York">
   <meta property="og:title" content="Christopher R. Bridge & Co. Law Firm">
@@ -16,7 +17,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
@@ -27,7 +30,7 @@
   <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Christopher R. Bridge & Co. Home">
-        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img">
+        <img src="images/logo.svg" alt="CR Bridge Logo" class="nav-logo-img" fetchpriority="high">
         <div class="nav-logo-divider"></div>
         <div class="nav-logo-text">
           <span class="logo-primary">Christopher R. Bridge &amp; Co.</span>
